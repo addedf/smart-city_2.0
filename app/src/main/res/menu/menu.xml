@@ -5,21 +5,21 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="Item" />
+        android:title="首页" />
     <item
         android:id="@+id/help"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="Item" />
+        android:title="服务" />
     <item
         android:id="@+id/servler"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="Item" />
+        android:title="精准扶贫" />
     <item
         android:id="@+id/news"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="Item" />
+        android:title="新闻" />
     <item
         android:id="@+id/me"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="Item" />
+        android:title="个人中心" />
 </menu>
