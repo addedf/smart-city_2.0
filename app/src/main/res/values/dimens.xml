@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    自定义常用dp-->
+    <dimen name="margin">10dp</dimen>
+    <dimen name="layout_marginVertical">16dp</dimen>
+
+<!--    字体大小-->
+    <dimen name="title">10sp</dimen>
+    <dimen name="h1">14sp</dimen>
+    <dimen name="h2">12sp</dimen>
+    <dimen name="h3">10sp</dimen>
+
+<!--    icon大小-->
+    <dimen name="icon_size">25dp</dimen>
+</resources>
