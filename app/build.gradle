@@ -57,6 +57,7 @@ dependencies {
     implementation files('libs\\glide-4.10.0.aar')
     implementation files('libs\\kotlin-stdlib-common-1.4.10.jar')
     implementation files('libs\\MPAndroidChart-v3.1.0.aar')
+    implementation files('libs\\GsonFormat.jar')
 
 
     testImplementation 'junit:junit:4.+'
