@@ -18,7 +18,7 @@ import java.lang.Exception
 class Tool(val context: Context) {
     companion object {
         const val TAG = "Tool"
-        val handles = android.os.Handler()
+        val handler = android.os.Handler()
         val client = OkHttpClient()
     }
 
@@ -33,7 +33,7 @@ class Tool(val context: Context) {
     }
 
     fun getUrl(url: String): String {
-        return "http://${get("server")}:${get("port")}${url}"
+        return "http://${get("server")}:${get("port")}$url"
     }
 
     fun send(
@@ -52,12 +52,12 @@ class Tool(val context: Context) {
             }
             client.newCall(req.build()).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    Log.e(TAG, "请求失败:${e.message}")
+                    Log.e(TAG, "请求失败：${e.message}")
                 }
 
                 override fun onResponse(call: Call, response: Response) {
                     val str = response.body?.string()
-                    handles.post {
+                    handler.post {
                         if (str != null) {
                             then(str)
                         }
@@ -88,7 +88,7 @@ class Tool(val context: Context) {
 
     fun setBanner(view:ViewPager2,list:List<String>) {
         view.adapter = GenericAdapter(Int.MAX_VALUE,
-            { BannerViewBinding.inflate(LayoutInflater.from(context)) }) { binding,position->
+            { BannerViewBinding.inflate(LayoutInflater.from(context)) }) { binding, position->
             binding.root.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT

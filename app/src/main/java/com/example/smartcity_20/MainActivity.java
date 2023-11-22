@@ -11,6 +11,7 @@ import com.example.smartcity_20.Fragment.HomeFragment;
 import com.example.smartcity_20.Fragment.MeFragment;
 import com.example.smartcity_20.Fragment.NewsFragment;
 import com.example.smartcity_20.Fragment.ServlerFragment;
+import com.example.smartcity_20.config.kotlin.Tool;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initview();
     }
 

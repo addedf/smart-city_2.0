@@ -3,13 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.smartcity_20">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SmartCity_20">
+        android:theme="@style/Theme.SmartCity_20"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".service.pethospital.PetHospitalActivity"></activity>
+        <activity android:name=".service.takeout.TakeOutActivity" />
+        <activity android:name=".service.house.HouseActivity" />
+        <activity android:name=".service.legal.LegalActivity" />
+        <activity android:name=".service.hospital.HospitalActivity" />
         <activity android:name=".YIDaoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,9 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
