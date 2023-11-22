@@ -20,14 +20,14 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class OkHttpRequest {
-    private static String TOKEN ;
-    private static String TAG = "TAG" ;
-    private static String URL ="http://124.93.196.45:10001/";
-    private static String GET = "get" ;
-    private static String POST = "post" ;
-    private static String PUT = "put" ;
-    private static Gson gson;
-    private static OkHttpClient okHttpClient;
+    public static String TOKEN ;
+    public static String TAG = "TAG" ;
+    public static String URL ="http://124.93.196.45:10001/";
+    public static String GET = "get" ;
+    public static String POST = "post" ;
+    public static String PUT = "put" ;
+    public static Gson gson;
+    public static OkHttpClient okHttpClient;
 
     public  static void init(){
         okHttpClient = new OkHttpClient();
@@ -38,6 +38,8 @@ public class OkHttpRequest {
         Request.Builder builder = new Request.Builder();
         if(!TextUtils.isEmpty(url)){
             url = URL + url;
+            Log.v(TAG,"url: "+url);
+            builder.url(url);
         }
 
         if(!TextUtils.isEmpty(TOKEN)){
@@ -61,7 +63,7 @@ public class OkHttpRequest {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 netRequst.no("Request failure");
-                Log.v(TAG,"no"+e.getMessage());
+                Log.v(TAG,"no: "+e.getMessage());
             }
 
             @Override
@@ -73,7 +75,7 @@ public class OkHttpRequest {
                     Object obj = gson.fromJson(json, classof);
                     netRequst.ok(obj);
                 } catch (JsonSyntaxException e) {
-                    Log.v(TAG,"ok"+e.getMessage());
+                    Log.v(TAG,"ok:"+e.getMessage());
                     netRequst.no("Request failure.Json parse exception");
                 }
             }
@@ -82,7 +84,7 @@ public class OkHttpRequest {
     }
 
 
-    interface NetRequst{
+    public interface NetRequst{
         void ok(Object obj);
         void no(String msg);
     }

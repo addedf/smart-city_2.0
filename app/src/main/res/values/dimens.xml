@@ -2,6 +2,7 @@
 <resources>
 <!--    自定义常用dp-->
     <dimen name="margin">10dp</dimen>
+    <dimen name="eight">8dp</dimen>
     <dimen name="layout_marginVertical">16dp</dimen>
     <dimen name="toolbar">44dp</dimen>
     <dimen name="five">5dp</dimen>

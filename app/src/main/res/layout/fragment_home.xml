@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/def"
     tools:context=".Fragment.HomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="400dp"
+                android:id="@+id/sear"
+                android:background="@drawable/l_yuan_white"
+                android:layout_height="wrap_content">
+            </androidx.appcompat.widget.SearchView>
+        </LinearLayout>
 
-</FrameLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+        </androidx.viewpager.widget.ViewPager>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/helplist"
+            android:paddingHorizontal="8dp"
+            android:background="@drawable/defaul_bg"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:layout_margin="@dimen/eight"
+            android:text="热门主题"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/title">
+        </TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/newshots"
+            android:paddingHorizontal="8dp"
+            android:background="@drawable/defaul_bg"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            app:tabMode="scrollable"
+            android:id="@+id/mytab"
+            android:layout_marginHorizontal="8dp"
+            android:layout_height="wrap_content">
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/newlist"
+            android:background="@drawable/defaul_bg"
+            android:layout_margin="@dimen/margin"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
