@@ -1,14 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/def"
     android:layout_height="match_parent"
     tools:context=".Fragment.MeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:padding="5dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="#03A9F4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/title"
+        android:text="个人中心">
+    </TextView>
+    <RelativeLayout
+        android:background="#03A9F4"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <ImageView
+            android:id="@+id/imgUrl"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/waimai"
+            android:layout_width="88dp"
+            android:layout_height="88dp">
+        </ImageView>
+        <TextView
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/margin"
+            android:text="未登录"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/imgUrl"
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </RelativeLayout>
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@color/def"
+            android:layout_marginHorizontal="@dimen/margin"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/penosn"
+                android:background="@drawable/defaul_bg"
+                android:text="个人信息"
+                android:padding="@dimen/layout_marginVertical"
+                android:textSize="@dimen/h1"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <TextView
+                android:id="@+id/orderlist"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/defaul_bg"
+                android:text="订单列表"
+                android:padding="@dimen/layout_marginVertical"
+
+                android:textSize="@dimen/h1"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <TextView
+                android:id="@+id/setpwd"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/defaul_bg"
+                android:text="修改密码"
+                android:padding="@dimen/layout_marginVertical"
+                android:textSize="@dimen/h1"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <TextView
+                android:id="@+id/set_where"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/defaul_bg"
+                android:text="意见反馈页"
+                android:padding="@dimen/layout_marginVertical"
+                android:textSize="@dimen/h1"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_marginTop="@dimen/layout_marginVertical"
+        android:padding="@dimen/margin"
+        android:text="登录"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="#03A9F4"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+</LinearLayout>

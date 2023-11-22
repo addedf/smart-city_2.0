@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".me.LoginActivity">
+
+
+    <FrameLayout
+        android:background="#2196F3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/bloak"
+            android:layout_margin="@dimen/margin"
+            android:src="@drawable/bloak"
+            android:layout_width="30dp"
+            android:layout_height="30dp">
+        </ImageView>
+
+        <TextView
+            android:textColor="@color/white"
+            android:text="登录界面"
+            android:padding="5dp"
+            android:id="@+id/title"
+            android:gravity="center"
+            android:maxLength="10"
+            android:textSize="@dimen/title"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:background="@drawable/defaul_bg"
+        android:layout_marginHorizontal="@dimen/layout_marginVertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:text="登录"
+            android:padding="@dimen/margin"
+            android:textColor="@color/purple_200"
+            android:gravity="center"
+            android:textSize="@dimen/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+        <EditText
+            android:layout_gravity="center"
+            android:hint="请输入用户名"
+            android:padding="5dp"
+            android:id="@+id/ed_username"
+            android:background="@drawable/l_yuanandsolid_white"
+            android:layout_width="300dp"
+            android:layout_height="48dp">
+        </EditText>
+        <EditText
+            android:layout_gravity="center"
+            android:hint="请输入密码"
+            android:padding="5dp"
+            android:id="@+id/ed_pwd"
+            android:layout_marginTop="@dimen/layout_marginVertical"
+            android:background="@drawable/l_yuanandsolid_white"
+            android:layout_width="300dp"
+            android:layout_height="48dp">
+        </EditText>
+
+        <TextView
+            android:layout_width="300dp"
+            android:padding="@dimen/margin"
+            android:text="登录"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/layout_marginVertical"
+            android:background="@drawable/l_yuan_bule"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/enroll"
+            android:textSize="@dimen/h1"
+            android:text="注册"
+            android:layout_gravity="right"
+            android:padding="5dp"
+            android:layout_marginRight="40dp"
+            android:textColor="@color/purple_200"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </LinearLayout>
+</LinearLayout>

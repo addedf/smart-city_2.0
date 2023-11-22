@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/def"
+    tools:context=".home.NewXuanQingActivity">
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical">
+     <FrameLayout
+         android:background="#03A9F4"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+         <ImageView
+             android:id="@+id/bloak"
+             android:layout_margin="@dimen/margin"
+             android:src="@drawable/bloak"
+             android:layout_width="30dp"
+             android:layout_height="30dp">
+         </ImageView>
+
+         <TextView
+             android:textColor="@color/white"
+             android:text="标题"
+             android:padding="5dp"
+             android:id="@+id/title"
+             android:gravity="center"
+             android:maxLength="10"
+             android:textSize="@dimen/title"
+             android:layout_gravity="center"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+         </TextView>
+     </FrameLayout>
+     <ImageView
+         android:scaleType="centerCrop"
+         android:id="@+id/cover"
+         android:layout_width="match_parent"
+         android:layout_height="200dp">
+     </ImageView>
+     <TextView
+         android:layout_margin="@dimen/margin"
+         android:background="@color/def"
+         android:id="@+id/content"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+     </TextView>
+ </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,12 +1,14 @@
 package com.example.smartcity_20.home.apter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.smartcity_20.R;
+import com.example.smartcity_20.config.java.Common;
 import com.example.smartcity_20.config.java.IpandPort;
+import com.example.smartcity_20.home.NewXuanQingActivity;
 import com.example.smartcity_20.home.bean.HotnewsBean;
 
 import java.util.List;
@@ -58,6 +62,17 @@ public class NewslistApter extends RecyclerView.Adapter<NewslistApter.Myhot>{
             if(!TextUtils.isEmpty(list.get(position).getCreateTime())){
                 holder.createTime.setText(list.get(position).getCreateTime());
             }
+
+            //跳转到
+            holder.re.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, NewXuanQingActivity.class);
+                    intent.putExtra(Common.NEWXUANQINGACTIVITY,String.valueOf(list.get(position).getId()));
+                    context.startActivity(intent);
+
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,6 +90,7 @@ public class NewslistApter extends RecyclerView.Adapter<NewslistApter.Myhot>{
         private final TextView content;
         private final TextView likeNum;
         private final TextView createTime;
+        private final RelativeLayout re;
 
         public Myhot(@NonNull View itemView) {
             super(itemView);
@@ -83,6 +99,7 @@ public class NewslistApter extends RecyclerView.Adapter<NewslistApter.Myhot>{
             content = itemView.findViewById(R.id.content);
             likeNum = itemView.findViewById(R.id.likeNum);
             createTime = itemView.findViewById(R.id.createTime);
+            re = itemView.findViewById(R.id.re);
         }
     }
 
