@@ -2,6 +2,7 @@
 <resources>
 <!--    自定义常用dp-->
     <dimen name="margin">10dp</dimen>
+    <dimen name="eight">8dp</dimen>
     <dimen name="layout_marginVertical">16dp</dimen>
 
 <!--    字体大小-->
@@ -11,5 +12,5 @@
     <dimen name="h3">10sp</dimen>
 
 <!--    icon大小-->
-    <dimen name="icon_size">25dp</dimen>
+    <dimen name="icon_size">44dp</dimen>
 </resources>
