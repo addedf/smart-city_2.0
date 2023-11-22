@@ -10,13 +10,13 @@
 
 
     <FrameLayout
-        android:background="#2196F3"
+        android:background="@color/purple_200"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/toolbar">
         <ImageView
             android:id="@+id/bloak"
             android:layout_margin="@dimen/margin"
-            android:src="@drawable/bloak"
+            android:src="@drawable/ic_back"
             android:layout_width="30dp"
             android:layout_height="30dp">
         </ImageView>
@@ -70,18 +70,6 @@
             android:layout_width="300dp"
             android:layout_height="48dp">
         </EditText>
-
-        <TextView
-            android:layout_width="300dp"
-            android:padding="@dimen/margin"
-            android:text="登录"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/layout_marginVertical"
-            android:background="@drawable/l_yuan_bule"
-            android:layout_height="match_parent">
-        </TextView>
         <TextView
             android:id="@+id/enroll"
             android:textSize="@dimen/h1"
@@ -92,6 +80,17 @@
             android:textColor="@color/purple_200"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:layout_width="300dp"
+            android:padding="@dimen/margin"
+            android:text="登录"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="280dp"
+            android:background="@drawable/btn_shape"
+            android:layout_height="match_parent">
         </TextView>
     </LinearLayout>
 </LinearLayout>
