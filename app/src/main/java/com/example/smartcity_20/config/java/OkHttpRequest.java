@@ -53,9 +53,9 @@ public class OkHttpRequest {
         if(GET.equals(method)){
             builder.get();
         }else if(POST.equals(method) && json.length>0){
-            builder.post(RequestBody.create(json[0], MediaType.parse("application/json,charset=utf-8")));
+            builder.post(RequestBody.create(json[0], MediaType.parse("application/json; charset=utf-8")));
         }else if(PUT.equals(method) && json.length>0){
-            builder.put(RequestBody.create(json[0], MediaType.parse("application/json,charset=utf-8")));
+            builder.put(RequestBody.create(json[0], MediaType.parse("application/json; charset=utf-8")));
         }
 
         Request build = builder.build();
@@ -74,7 +74,7 @@ public class OkHttpRequest {
                 try {
                     Object obj = gson.fromJson(json, classof);
                     netRequst.ok(obj);
-                } catch (JsonSyntaxException e) {
+                } catch (Exception e) {
                     Log.v(TAG,"ok:"+e.getMessage());
                     netRequst.no("Request failure.Json parse exception");
                 }

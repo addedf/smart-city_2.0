@@ -1,6 +1,7 @@
 package com.example.smartcity_20.Fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,17 +43,29 @@ public class HomeFragment extends Fragment {
     private RecyclerView newlist;
     private TabLayout mytab;
     private Context context;
+    private String TAG = "TAG";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         initview();
+        //判断是否登录过
+        islogin();
         vpmap();
         help_list();
         hot_news();
         my_tab();
         return view;
+    }
+
+    private void islogin() {
+        SharedPreferences login = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+        String token = login.getString("TOKEN", "");
+        if(!"".equals(token) && !TextUtils.isEmpty(token)){
+            OkHttpRequest.TOKEN=token;
+            Log.e(TAG,"Token="+token);
+        }
     }
 
     private void my_tab() {

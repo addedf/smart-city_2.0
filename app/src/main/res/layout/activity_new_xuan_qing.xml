@@ -19,7 +19,7 @@
          <ImageView
              android:id="@+id/bloak"
              android:layout_margin="@dimen/margin"
-             android:src="@drawable/bloak"
+             android:src="@drawable/ic_back"
              android:layout_width="30dp"
              android:layout_height="30dp">
          </ImageView>

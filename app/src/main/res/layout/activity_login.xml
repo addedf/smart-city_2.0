@@ -82,13 +82,13 @@
             android:layout_height="wrap_content">
         </TextView>
         <TextView
+            android:id="@+id/submit"
             android:layout_width="300dp"
             android:padding="@dimen/margin"
             android:text="登录"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="280dp"
             android:background="@drawable/btn_shape"
             android:layout_height="match_parent">
         </TextView>
