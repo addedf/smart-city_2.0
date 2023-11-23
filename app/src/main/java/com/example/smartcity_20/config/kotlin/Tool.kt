@@ -13,6 +13,7 @@ import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 import java.lang.Exception
+import java.util.*
 
 // TODO("记不住")
 class Tool(val context: Context) {
@@ -22,7 +23,7 @@ class Tool(val context: Context) {
         val client = OkHttpClient()
     }
 
-    val sp = context.getSharedPreferences("data", Context.MODE_PRIVATE)
+    val sp = context.getSharedPreferences("login", Context.MODE_PRIVATE)
 
     fun get(key: String): String {
         return sp.getString(key, "").toString()
@@ -34,6 +35,41 @@ class Tool(val context: Context) {
 
     fun getUrl(url: String): String {
         return "http://${get("server")}:${get("port")}$url"
+    }
+
+    fun <T> send(
+        url: String,
+        method: String,
+        body: RequestBody?,
+        auth: Boolean,
+        clazz: Class<T>?,
+        then: (T) -> Unit
+    ) {
+        try {
+            val req = Request.Builder()
+            req.url(getUrl(url))
+            req.method(method, body)
+            if (auth) {
+                req.addHeader("Authorization", "Bearer ${get("TOKEN")}")
+                Log.e(TAG, "send: ${get("TOKEN")}")
+            }
+            client.newCall(req.build()).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.e(TAG, "请求失败：${e.message}")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val str = response.body?.string()
+                    val gson = g.fromJson(str, clazz)
+                    handler.post {
+                        then(gson)
+                    }
+                }
+
+            })
+        } catch (e: Exception) {
+            Log.e(TAG, "send: 解析错误${e.message}")
+        }
     }
 
     fun send(
@@ -48,7 +84,8 @@ class Tool(val context: Context) {
             req.url(getUrl(url))
             req.method(method, body)
             if (auth) {
-                req.addHeader("Authorization", "Bearer ${get("token")}")
+                req.addHeader("Authorization", "Bearer ${get("TOKEN")}")
+                Log.e(TAG, "send: ${get("TOKEN")}")
             }
             client.newCall(req.build()).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
@@ -57,6 +94,7 @@ class Tool(val context: Context) {
 
                 override fun onResponse(call: Call, response: Response) {
                     val str = response.body?.string()
+
                     handler.post {
                         if (str != null) {
                             then(str)
@@ -69,6 +107,7 @@ class Tool(val context: Context) {
             Log.e(TAG, "send: 解析错误${e.message}")
         }
     }
+
 
     fun checkToken(fn: (Boolean) -> Unit) {
         send("/prod-api/api/common/user/getInfo", "GET", null, true) {
