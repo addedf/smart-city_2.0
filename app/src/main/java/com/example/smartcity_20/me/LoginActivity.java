@@ -113,14 +113,12 @@ public class LoginActivity extends AppCompatActivity {
         enroll = findViewById(R.id.enroll);
         submit = findViewById(R.id.submit);
         context = LoginActivity.this;
-
-
         ed_username.setText(User.USER);
         ed_pwd.setText(User.PWD);
 
         login = getSharedPreferences("login", Context.MODE_PRIVATE);
         edit = login.edit();
-        String pwd = login.getString("pwd", "");
+        String pwd = login.getString("PWD", "");
         if(!"".equals(pwd.trim())){
             ed_pwd.setText(pwd);
         }

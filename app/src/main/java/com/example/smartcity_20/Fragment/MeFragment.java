@@ -19,7 +19,9 @@ import com.example.smartcity_20.config.java.OkHttpRequest;
 import com.example.smartcity_20.home.apter.VpmapApter;
 import com.example.smartcity_20.home.bean.VpmapBean;
 import com.example.smartcity_20.me.ChangepasswordActivity;
+import com.example.smartcity_20.me.FeedbackActivity;
 import com.example.smartcity_20.me.LoginActivity;
+import com.example.smartcity_20.me.OrderActivity;
 import com.example.smartcity_20.me.PersonalinformationActivity;
 import com.example.smartcity_20.me.bean.QuerypersonalBean;
 import com.google.gson.Gson;
@@ -51,7 +53,29 @@ public class MeFragment extends Fragment {
         querypersonal();
         Personalinformation();
         editpwd();
+        feedback();
+        intentorder();
         return view;
+    }
+
+    private void intentorder() {
+        orderlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, OrderActivity.class);
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    private void feedback() {
+        set_where.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, FeedbackActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void editpwd() {

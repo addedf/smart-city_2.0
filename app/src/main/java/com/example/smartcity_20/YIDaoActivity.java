@@ -45,7 +45,6 @@ public class YIDaoActivity extends AppCompatActivity {
         SharedPreferences isfirstlogin = getSharedPreferences("isfirstlogin", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = isfirstlogin.edit();
         boolean isfirst = isfirstlogin.getBoolean("isfirst", true);
-        Log.d(TAG,"isfirst"+isfirst);
         if(isfirst){
             initview();
             imglist();

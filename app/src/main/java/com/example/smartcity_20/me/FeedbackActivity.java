@@ -2,8 +2,6 @@ package com.example.smartcity_20.me;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,62 +12,57 @@ import android.widget.Toast;
 
 import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.OkHttpRequest;
-import com.example.smartcity_20.me.bean.GeneralBean;
 import com.example.smartcity_20.me.bean.StatusBean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ChangepasswordActivity extends AppCompatActivity {
+public class FeedbackActivity extends AppCompatActivity {
 
     private ImageView ic_back;
-    private EditText ed_oldpwd;
-    private EditText ed_newpwd;
+    private FeedbackActivity context;
     private TextView submit;
-    private ChangepasswordActivity context;
-    private SharedPreferences login;
-    private SharedPreferences.Editor edit;
-    private String pwd;
+    private EditText ed_feed;
+    private EditText ed_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_changepassword_activity);
+        setContentView(R.layout.activity_feedback);
+        context = this;
         initview();
         img_bloak();
-        submitpwd();
+        submitfeed();
     }
 
-    private void submitpwd() {
+    private void submitfeed() {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ed_old = ed_oldpwd.getText().toString();
-                String ed_new = ed_newpwd.getText().toString();
+                String title = ed_title.getText().toString();
+                String feed = ed_feed.getText().toString();
 
-                //判空,并且输入的密码要和账号的密码保存一致
-                if(!"".equals(ed_old.trim()) && !TextUtils.isEmpty(ed_old)
-                    && !"".equals(ed_new.trim()) && !TextUtils.isEmpty(ed_new)
-                    && !"".equals(pwd.trim()) && pwd.equals(ed_old)){
+                if(!"".equals(title.trim()) && !TextUtils.isEmpty(title)
+                        && !"".equals(feed.trim()) && !TextUtils.isEmpty(feed)){
 
                     JSONObject jsonObject = new JSONObject();
                     try {
-                        jsonObject.put("newPassword",ed_new);
-                        jsonObject.put("oldPassword",ed_old);
-                        savepwd(jsonObject.toString(),ed_new);
+                        jsonObject.put("content",feed);
+                        jsonObject.put("title",title);
+                        savefeed(jsonObject.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }else{
-                    Toast.makeText(context, "修改失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "提交的内容不能为空", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void savepwd(String JSON,String newPWD) {
-        OkHttpRequest.doNetRequst("prod-api/api/common/user/resetPwd",
-                OkHttpRequest.PUT,
+    private void savefeed(String JSON) {
+        OkHttpRequest.doNetRequst("prod-api/api/common/feedback",
+                OkHttpRequest.POST,
                 StatusBean.class,
                 new OkHttpRequest.NetRequst() {
                     @Override
@@ -79,9 +72,7 @@ public class ChangepasswordActivity extends AppCompatActivity {
                             public void run() {
                                 StatusBean statusBean =(StatusBean)obj;
                                 if(statusBean.getCode()==200){
-                                    edit.putString("PWD",newPWD);
-                                    edit.apply();
-                                    Toast.makeText(context,"修改成功",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context,"提交成功",Toast.LENGTH_SHORT).show();
                                     context.finish();
                                 }else {
                                     Toast.makeText(context,statusBean.getMsg(),Toast.LENGTH_SHORT).show();
@@ -97,6 +88,13 @@ public class ChangepasswordActivity extends AppCompatActivity {
                 },JSON);
     }
 
+    private void initview() {
+        ic_back = findViewById(R.id.ic_back);
+        ed_title = findViewById(R.id.ed_title);
+        ed_feed = findViewById(R.id.ed_feed);
+        submit = findViewById(R.id.submit);
+    }
+
     private void img_bloak() {
         ic_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,17 +102,5 @@ public class ChangepasswordActivity extends AppCompatActivity {
                 context.finish();
             }
         });
-    }
-
-    private void initview() {
-        ic_back = findViewById(R.id.ic_back);
-        ed_oldpwd = findViewById(R.id.ed_oldpwd);
-        ed_newpwd = findViewById(R.id.ed_newpwd);
-        submit = findViewById(R.id.submit);
-
-        context = this;
-        login = context.getSharedPreferences("login", Context.MODE_PRIVATE);
-        edit = login.edit();
-        pwd = login.getString("PWD", "");
     }
 }
