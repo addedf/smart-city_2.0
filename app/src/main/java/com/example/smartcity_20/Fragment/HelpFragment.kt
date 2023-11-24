@@ -21,8 +21,8 @@ class HelpFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        loadBanner()
-        OkHttpRequest.doNetRequst(
+        loadBanner()
+       /* OkHttpRequest.doNetRequst(
             "prod-api/api/gov-service-hotline/ad-banner/list",
             OkHttpRequest.GET,
             HelpBannerBean::class.java,
@@ -42,7 +42,7 @@ class HelpFragment : Fragment() {
                     Log.e(TAG, "no: 失败")
                 }
 
-            })
+            })*/
         return vb.root
 
     }

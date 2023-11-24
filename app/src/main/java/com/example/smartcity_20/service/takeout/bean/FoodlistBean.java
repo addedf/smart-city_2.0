@@ -2,26 +2,34 @@ package com.example.smartcity_20.service.takeout.bean;
 
 import java.util.List;
 
-public class FoodhottyBean {
+public class FoodlistBean {
 
-    private int total;
-    private int code;
+    private Integer total;
+    private List<RowsBean> rows;
+    private Integer code;
     private String msg;
-    private List<RowsDTO> rows;
 
-    public int getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
 
-    public int getCode() {
+    public List<RowsBean> getRows() {
+        return rows;
+    }
+
+    public void setRows(List<RowsBean> rows) {
+        this.rows = rows;
+    }
+
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 
@@ -33,36 +41,28 @@ public class FoodhottyBean {
         this.msg = msg;
     }
 
-    public List<RowsDTO> getRows() {
-        return rows;
-    }
-
-    public void setRows(List<RowsDTO> rows) {
-        this.rows = rows;
-    }
-
-    public static class RowsDTO {
+    public static class RowsBean {
         private Object searchValue;
         private Object createBy;
         private String createTime;
         private Object updateBy;
         private String updateTime;
         private Object remark;
-        private ParamsDTO params;
-        private int id;
+        private ParamsBean params;
+        private Integer id;
         private String name;
         private String address;
         private String introduction;
-        private int themeId;
-        private double score;
-        private int saleQuantity;
-        private int deliveryTime;
+        private Integer themeId;
+        private Double score;
+        private Integer saleQuantity;
+        private Integer deliveryTime;
         private String imgUrl;
-        private double avgCost;
+        private Double avgCost;
         private Object other;
         private String recommend;
-        private double distance;
-        private int saleNum3hour;
+        private Double distance;
+        private Integer saleNum3hour;
 
         public Object getSearchValue() {
             return searchValue;
@@ -112,11 +112,11 @@ public class FoodhottyBean {
             this.remark = remark;
         }
 
-        public ParamsDTO getParams() {
+        public ParamsBean getParams() {
             return params;
         }
 
-        public void setParams(ParamsDTO params) {
+        public void setParams(ParamsBean params) {
             this.params = params;
         }
 
@@ -164,7 +164,7 @@ public class FoodhottyBean {
             return score;
         }
 
-        public void setScore(double score) {
+        public void setScore(Double score) {
             this.score = score;
         }
 
@@ -192,11 +192,11 @@ public class FoodhottyBean {
             this.imgUrl = imgUrl;
         }
 
-        public double getAvgCost() {
+        public Double getAvgCost() {
             return avgCost;
         }
 
-        public void setAvgCost(double avgCost) {
+        public void setAvgCost(Double avgCost) {
             this.avgCost = avgCost;
         }
 
@@ -216,7 +216,7 @@ public class FoodhottyBean {
             this.recommend = recommend;
         }
 
-        public double getDistance() {
+        public Double getDistance() {
             return distance;
         }
 
@@ -232,7 +232,7 @@ public class FoodhottyBean {
             this.saleNum3hour = saleNum3hour;
         }
 
-        public static class ParamsDTO {
+        public static class ParamsBean {
         }
     }
 }

@@ -80,8 +80,8 @@
          <androidx.recyclerview.widget.RecyclerView
              android:layout_width="match_parent"
              android:id="@+id/foodlist"
+             android:layout_marginHorizontal="@dimen/margin"
              android:background="@drawable/defaul_bg"
-             android:layout_margin="@dimen/margin"
              android:layout_height="wrap_content">
          </androidx.recyclerview.widget.RecyclerView>
   </LinearLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/def"
+    android:layout_height="match_parent"
+    tools:context=".service.takeout.FoodtypeActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@color/purple_200"
+        android:layout_height="@dimen/toolbar">
+        <ImageView
+            android:id="@+id/ic_back"
+            android:src="@drawable/ic_back"
+            android:layout_width="@dimen/back"
+            android:layout_height="@dimen/back"
+            android:layout_margin="@dimen/margin">
+        </ImageView>
+        <TextView
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=""
+            android:id="@+id/title"
+            android:textSize="@dimen/title"
+            android:padding="@dimen/margin"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/defaul_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        </androidx.appcompat.widget.SearchView>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+       android:layout_marginHorizontal="@dimen/margin"
+        android:background="@drawable/defaul_bg"
+        android:layout_width="match_parent"
+        android:id="@+id/shoplist"
+        android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

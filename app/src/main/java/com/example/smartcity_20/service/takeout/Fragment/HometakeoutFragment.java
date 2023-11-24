@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -17,8 +18,10 @@ import android.widget.ImageView;
 import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.kotlin.Tool;
 import com.example.smartcity_20.service.takeout.apter.FoodhottyApter;
+import com.example.smartcity_20.service.takeout.apter.FoodlistApter;
 import com.example.smartcity_20.service.takeout.apter.FoodtypeApter;
 import com.example.smartcity_20.service.takeout.bean.FoodhottyBean;
+import com.example.smartcity_20.service.takeout.bean.FoodlistBean;
 import com.example.smartcity_20.service.takeout.bean.FoodtypeBean;
 import com.example.smartcity_20.service.takeout.bean.VptakeoutBean;
 
@@ -52,7 +55,26 @@ public class HometakeoutFragment extends Fragment {
         vpmapmethod();
         foodtypemethod();
         foodhottymethod();
+        foodlistmethod();
         return view;
+    }
+
+    private void foodlistmethod() {
+        tool.send("/prod-api/api/takeout/seller/list",
+                "GET",
+                null,
+                true,
+                FoodlistBean.class,
+                new Function1<FoodlistBean, Unit>() {
+                    @Override
+                    public Unit invoke(FoodlistBean foodlistBean) {
+                        if(foodlistBean.getCode()==200){
+                            foodlist.setLayoutManager(new LinearLayoutManager(context));
+                            foodlist.setAdapter(new FoodlistApter(context,foodlistBean.getRows()));
+                        }
+                        return null;
+                    }
+                });
     }
 
     private void foodhottymethod() {

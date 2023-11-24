@@ -17,32 +17,30 @@ import com.bumptech.glide.Glide;
 import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.Common;
 import com.example.smartcity_20.config.java.IpandPort;
-import com.example.smartcity_20.home.apter.HelplistApter;
-import com.example.smartcity_20.home.bean.HelplistBean;
 import com.example.smartcity_20.service.takeout.FoodhotActivity;
-import com.example.smartcity_20.service.takeout.bean.FoodhottyBean;
+import com.example.smartcity_20.service.takeout.bean.FoodlistBean;
 
 import java.util.List;
 
-public class FoodhottyApter extends RecyclerView.Adapter<FoodhottyApter.Myhot>{
+public class FoodlistApter extends RecyclerView.Adapter<FoodlistApter.Myhot>{
 
     private Context context;
-    private List<FoodhottyBean.RowsDTO> list;
+    private List<FoodlistBean.RowsBean> list;
 
-    public FoodhottyApter(Context context, List<FoodhottyBean.RowsDTO> list) {
+    public FoodlistApter(Context context, List<FoodlistBean.RowsBean> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public FoodhottyApter.Myhot onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.l_item_foodhotty, null);
-        return new FoodhottyApter.Myhot(inflate);
+    public FoodlistApter.Myhot onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View inflate = LayoutInflater.from(context).inflate(R.layout.l_item_foodlist, null);
+        return new FoodlistApter.Myhot(inflate);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodhottyApter.Myhot holder, int position) {
+    public void onBindViewHolder(@NonNull FoodlistApter.Myhot holder, int position) {
         try {
             if(list.get(position) ==null){
                 return;
@@ -50,29 +48,37 @@ public class FoodhottyApter extends RecyclerView.Adapter<FoodhottyApter.Myhot>{
             if(!TextUtils.isEmpty(list.get(position).getImgUrl())){
                 Glide.with(context).load(IpandPort.URL+list.get(position).getImgUrl()).into(holder.imgUrl);
             }
-            if(list.get(position).getSaleNum3hour()!=null){
-                holder.saleNum3hour.setText("近三小时下单:"+String.valueOf(list.get(position).getSaleNum3hour()));
-            }
-
-            if(list.get(position).getName()!=null){
+            if(!TextUtils.isEmpty(list.get(position).getName())){
                 holder.name.setText(list.get(position).getName());
             }
 
+            if(list.get(position).getScore() !=  null){
+                holder.score.setText(String.valueOf(list.get(position).getScore()+"分"));
+            }
 
-            if(list.get(position).getScore() !=null){
-                holder.score.setText(String.valueOf(list.get(position).getScore())+"分");
+            if(list.get(position).getSaleQuantity() !=null ){
+                holder.saleQuantity.setText("月销量 "+String.valueOf(list.get(position).getSaleQuantity()));
+            }
+
+            if(list.get(position).getDistance() !=  null){
+                holder.distance.setText("到店距离: "+String.valueOf(list.get(position).getDistance()));
+            }
+
+            if(list.get(position).getAvgCost() !=  null){
+                holder.avgCost.setText("人均消费: "+String.valueOf(list.get(position).getAvgCost()));
             }
 
             holder.re.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context,FoodhotActivity.class);
+                    Intent intent = new Intent(context, FoodhotActivity.class);
                     if(list.get(position).getId() !=null){
                         intent.putExtra(Common.FoodhotActivity,String.valueOf(list.get(position).getId()));
                         context.startActivity(intent);
                     }
                 }
             });
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,18 +93,23 @@ public class FoodhottyApter extends RecyclerView.Adapter<FoodhottyApter.Myhot>{
 
         private final ImageView imgUrl;
         private final TextView name;
-        private final TextView saleNum3hour;
         private final TextView score;
+        private final TextView saleQuantity;
+        private final TextView distance;
+        private final TextView avgCost;
         private final RelativeLayout re;
 
         public Myhot(@NonNull View itemView) {
             super(itemView);
             imgUrl = itemView.findViewById(R.id.imgUrl);
             name = itemView.findViewById(R.id.name);
-            saleNum3hour = itemView.findViewById(R.id.saleNum3hour);
             score = itemView.findViewById(R.id.score);
+            saleQuantity = itemView.findViewById(R.id.saleQuantity);
+            distance = itemView.findViewById(R.id.distance);
+            avgCost = itemView.findViewById(R.id.avgCost);
             re = itemView.findViewById(R.id.re);
         }
     }
 
 }
+

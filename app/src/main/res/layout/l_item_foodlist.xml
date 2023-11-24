@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/re"
+    android:padding="@dimen/margin"
+    android:layout_height="match_parent">
+
+    <!--
+    显示附近商家模块，多行显示，每行显示一个店家信息，店家
+信息布局为左侧店家封面，右侧上方显示店家名称、评分（最多 5 分）、
+月销量、到店所需时间、到店距离、人均消费，点击店家信息进入店
+家详情页
+    -->
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginRight="@dimen/margin"
+        android:id="@+id/card"
+        android:background="@drawable/defaul_bg"
+        android:layout_width="120dp"
+        android:layout_height="67dp">
+        <ImageView
+            android:scaleType="centerCrop"
+            android:id="@+id/imgUrl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ImageView>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_toRightOf="@+id/card"
+        android:textSize="@dimen/h1"
+        android:layout_width="wrap_content"
+        android:id="@+id/name"
+        android:text="xxx"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+
+        android:text="xxx"
+        android:layout_toRightOf="@+id/card"
+        android:textSize="@dimen/h3"
+        android:layout_below="@+id/name"
+        android:textColor="#F4511E"
+        android:layout_width="wrap_content"
+        android:id="@+id/score"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView  android:layout_marginTop="2dp"
+        android:text="xxx"
+        android:layout_toRightOf="@+id/card"
+        android:textSize="@dimen/h3"
+        android:layout_below="@+id/score"
+        android:textColor="@color/h2color"
+        android:layout_width="wrap_content"
+        android:id="@+id/saleQuantity"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView  android:layout_marginTop="2dp"
+        android:text="xxx"
+        android:layout_toRightOf="@+id/card"
+        android:textSize="@dimen/h3"
+        android:layout_below="@+id/saleQuantity"
+        android:textColor="@color/h2color"
+        android:layout_width="wrap_content"
+        android:id="@+id/distance"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView  android:layout_marginTop="2dp"
+        android:text="xxx"
+        android:layout_marginRight="20dp"
+        android:textSize="@dimen/h3"
+        android:layout_below="@+id/saleQuantity"
+        android:textColor="@color/h2color"
+        android:layout_width="wrap_content"
+        android:id="@+id/avgCost"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <View
+        android:layout_marginTop="@dimen/margin"
+        android:layout_below="@+id/card"
+        android:layout_width="match_parent"
+        android:background="#999"
+        android:layout_height="1px">
+    </View>
+</RelativeLayout>
