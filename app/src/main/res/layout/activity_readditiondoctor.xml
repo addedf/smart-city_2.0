@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/def"
+    tools:context=".service.pethospital.ReadditiondoctorActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@color/purple_200"
+        android:layout_height="@dimen/toolbar">
+        <ImageView
+            android:id="@+id/ic_back"
+            android:src="@drawable/ic_back"
+            android:layout_width="@dimen/back"
+            android:layout_height="@dimen/back"
+            android:layout_margin="@dimen/margin">
+        </ImageView>
+        <TextView
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="问诊详情"
+            android:textSize="@dimen/title"
+            android:padding="@dimen/margin"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+    </FrameLayout>
+
+
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/defaul_bg"
+        android:layout_margin="@dimen/margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="医生姓名"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black">
+            </TextView>
+
+            <TextView
+                android:id="@+id/name"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="医生职称"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black">
+            </TextView>
+
+            <TextView
+                android:gravity="right"
+                android:id="@+id/jobName"
+                android:layout_width="match_parent"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="执业编号"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black">
+            </TextView>
+
+            <TextView
+                android:gravity="right"
+                android:id="@+id/practiceNo"
+                android:layout_width="match_parent"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="咨询描述"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black">
+            </TextView>
+
+            <TextView
+                android:gravity="right"
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="医生回复"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black">
+            </TextView>
+
+            <TextView
+                android:text="无"
+                android:gravity="right"
+                android:id="@+id/doctorwhy"
+                android:layout_width="match_parent"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content">
+            </TextView>
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:text="继续提问"
+            android:id="@+id/submit"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_shape"
+            android:padding="@dimen/margin"
+            android:layout_marginHorizontal="10dp"
+            >
+        </TextView>
+    </LinearLayout>
+</LinearLayout>

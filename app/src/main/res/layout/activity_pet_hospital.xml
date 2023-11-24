@@ -1,9 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/def"
     tools:context=".service.pethospital.PetHospitalActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+       <FrameLayout
+           android:layout_width="match_parent"
+           android:background="@color/purple_200"
+           android:layout_height="@dimen/toolbar">
+           <ImageView
+               android:id="@+id/ic_back"
+               android:src="@drawable/ic_back"
+               android:layout_width="@dimen/back"
+               android:layout_height="@dimen/back"
+               android:layout_margin="@dimen/margin">
+           </ImageView>
+           <TextView
+               android:layout_gravity="center"
+               android:gravity="center"
+               android:text="宠物医院"
+               android:textSize="@dimen/title"
+               android:padding="@dimen/margin"
+               android:textColor="@color/white"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+           </TextView>
+       </FrameLayout>
+
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/typelist"
+           android:layout_width="match_parent"
+           android:background="@drawable/defaul_bg"
+           android:layout_margin="@dimen/margin"
+           android:layout_height="wrap_content">
+       </androidx.recyclerview.widget.RecyclerView>
+
+
+       <com.google.android.material.tabs.TabLayout
+           android:layout_width="match_parent"
+           android:id="@+id/mytab"
+           android:background="@drawable/defaul_bg"
+
+           android:layout_marginHorizontal="@dimen/margin"
+           android:layout_height="@dimen/toolbar">
+       </com.google.android.material.tabs.TabLayout>
+       <FrameLayout
+           android:layout_margin="@dimen/margin"
+           android:layout_width="match_parent"
+           android:background="@drawable/defaul_bg"
+
+           android:layout_height="wrap_content">
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/caselist"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+           </androidx.recyclerview.widget.RecyclerView>
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/mycaselist"
+               android:visibility="gone"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+           </androidx.recyclerview.widget.RecyclerView>
+       </FrameLayout>
+   </LinearLayout>
+</androidx.core.widget.NestedScrollView>

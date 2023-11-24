@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/re"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="120dp"
+        android:layout_height="67dp"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/defaul_bg">
+        <ImageView
+            android:src="@drawable/waimai"
+            android:scaleType="centerCrop"
+            android:id="@+id/imageUrls"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ImageView>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/h1"
+        android:id="@+id/name"
+        android:textColor="@color/black">
+    </TextView>
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="无"
+        android:layout_below="@+id/name"
+        android:textSize="@dimen/h3"
+        android:maxLines="2"
+        android:textColor="@color/h2color">
+    </TextView>
+
+    <View
+        android:layout_marginTop="@dimen/five"
+        android:layout_below="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/h2color">
+    </View>
+</RelativeLayout>
