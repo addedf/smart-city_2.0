@@ -14,11 +14,17 @@ import android.widget.Toast;
 
 import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.OkHttpRequest;
+import com.example.smartcity_20.config.kotlin.Tool;
 import com.example.smartcity_20.me.bean.GeneralBean;
 import com.example.smartcity_20.me.bean.StatusBean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class ChangepasswordActivity extends AppCompatActivity {
 
@@ -46,7 +52,6 @@ public class ChangepasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String ed_old = ed_oldpwd.getText().toString();
                 String ed_new = ed_newpwd.getText().toString();
-
                 //判空,并且输入的密码要和账号的密码保存一致
                 if(!"".equals(ed_old.trim()) && !TextUtils.isEmpty(ed_old)
                     && !"".equals(ed_new.trim()) && !TextUtils.isEmpty(ed_new)
@@ -68,7 +73,7 @@ public class ChangepasswordActivity extends AppCompatActivity {
     }
 
     private void savepwd(String JSON,String newPWD) {
-        OkHttpRequest.doNetRequst("prod-api/api/common/user/resetPwd",
+        /*OkHttpRequest.doNetRequst("prod-api/api/common/user/resetPwd",
                 OkHttpRequest.PUT,
                 StatusBean.class,
                 new OkHttpRequest.NetRequst() {
@@ -94,7 +99,24 @@ public class ChangepasswordActivity extends AppCompatActivity {
                     public void no(String msg) {
 
                     }
-                },JSON);
+                },JSON);*/
+        Tool tool = new Tool(ChangepasswordActivity.this);
+        tool.send("/prod-api/api/common/user/resetPwd",
+                "PUT", RequestBody.create(JSON, MediaType.parse("application/json; charset=utf-8")), true, StatusBean.class,
+                new Function1<StatusBean, Unit>() {
+                    @Override
+                    public Unit invoke(StatusBean statusBean) {
+                        if(statusBean.getCode()==200){
+                            edit.putString("PWD",newPWD);
+                            edit.apply();
+                            Toast.makeText(context,"修改成功",Toast.LENGTH_SHORT).show();
+                            context.finish();
+                        }else {
+                            Toast.makeText(context,statusBean.getMsg(),Toast.LENGTH_SHORT).show();
+                        }
+                        return null;
+                    }
+                });
     }
 
     private void img_bloak() {

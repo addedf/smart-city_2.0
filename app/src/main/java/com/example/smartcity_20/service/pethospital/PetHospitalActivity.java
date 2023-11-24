@@ -6,18 +6,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.OkHttpRequest;
+import com.example.smartcity_20.config.kotlin.Tool;
 import com.example.smartcity_20.service.apter.PetTypeApter;
 import com.example.smartcity_20.service.apter.PetcaseApter;
 import com.example.smartcity_20.service.bean.PetTypeBean;
 import com.example.smartcity_20.service.bean.PetcaseBean;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class PetHospitalActivity extends AppCompatActivity {
 
@@ -111,8 +117,7 @@ public class PetHospitalActivity extends AppCompatActivity {
     private void sendcaselist() {
         caselist.setVisibility(View.VISIBLE);
         mycaselist.setVisibility(View.GONE);
-
-        OkHttpRequest.doNetRequst("prod-api/api/pet-hospital/inquiry/list?pageNum=1&pageSize=10",
+        /*OkHttpRequest.doNetRequst("prod-api/api/pet-hospital/inquiry/list?pageNum=1&pageSize=10",
                 OkHttpRequest.GET,
                 PetcaseBean.class,
                 new OkHttpRequest.NetRequst() {
@@ -133,6 +138,18 @@ public class PetHospitalActivity extends AppCompatActivity {
                     @Override
                     public void no(String msg) {
 
+                    }
+                });*/
+        Tool tool = new Tool(context);
+        tool.send("/prod-api/api/pet-hospital/inquiry/list?pageNum=1&pageSize=10",
+                "GET", null, true, PetcaseBean.class, new Function1<PetcaseBean, Unit>() {
+                    @Override
+                    public Unit invoke(PetcaseBean petcaseBean) {
+                        if(petcaseBean.getCode()==200){
+                            caselist.setAdapter(new PetcaseApter(context,petcaseBean.getRows()));
+                            caselist.setLayoutManager(new LinearLayoutManager(context));
+                        }
+                        return null;
                     }
                 });
     }
@@ -178,5 +195,8 @@ public class PetHospitalActivity extends AppCompatActivity {
         typelist = findViewById(R.id.typelist);
         mytab = findViewById(R.id.mytab);
         caselist = findViewById(R.id.caselist);
+
+        /*View inflate = LayoutInflater.from(context).inflate(R.layout.activity_pet_hospital, null);
+        Snackbar.make(inflate,"未登录",Snackbar.LENGTH_SHORT).show();*/
     }
 }
