@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.smartcity_20.R
+import com.example.smartcity_20.config.java.OkHttpRequest
 import com.example.smartcity_20.config.kotlin.g
 import com.example.smartcity_20.config.kotlin.tool
 import com.example.smartcity_20.config.kotlin.viewBinding
@@ -20,7 +21,28 @@ class HelpFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        loadBanner()
+//        loadBanner()
+        OkHttpRequest.doNetRequst(
+            "prod-api/api/gov-service-hotline/ad-banner/list",
+            OkHttpRequest.GET,
+            HelpBannerBean::class.java,
+            object : OkHttpRequest.NetRequst {
+                override fun ok(obj: Any?) {
+//                    Log.e(TAG, "ok: ${obj as HelpBannerBean}")
+                    val str = obj as HelpBannerBean
+//                    val data = g.fromJson(str, HelpBannerBean::class.java).data
+                    val list = mutableListOf<String>()
+                    for (i in str.data.indices) {
+                        list.add(str.data[i].imgUrl)
+                    }
+                    tool.setBanner(vb.helpBanner, list)
+                }
+
+                override fun no(msg: String?) {
+                    Log.e(TAG, "no: 失败")
+                }
+
+            })
         return vb.root
 
     }

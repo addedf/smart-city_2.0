@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.example.smartcity_20.databinding.BannerViewBinding
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
 import java.lang.Exception
@@ -71,14 +73,49 @@ class Tool(val context: Context) {
         }
     }
 
+//    fun send(
+//        url: String,
+//        method: String,
+//        body: RequestBody?,
+//        auth: Boolean,
+//        then: (String) -> Unit
+//    ) {
+//        try {
+//            val req = Request.Builder()
+//            req.url(getUrl(url))
+//            req.method(method, body)
+//            if (auth) {
+//                req.addHeader("Authorization", "Bearer ${get("TOKEN")}")
+//            }
+//            client.newCall(req.build()).enqueue(object : Callback {
+//                override fun onFailure(call: Call, e: IOException) {
+//                    Log.e(TAG, "请求失败：${e.message}")
+//                }
+//
+//                override fun onResponse(call: Call, response: Response) {
+//                    val str = response.body?.string()
+//                    handler.post {
+//                        if (str != null) {
+//                            then(str)
+//                        }
+//                    }
+//                }
+//
+//            })
+//        } catch (e: Exception) {
+//            Log.e(TAG, "send: 解析错误${e.message}")
+//        }
+//    }
+
     fun send(
         url: String,
         method: String,
-        body: RequestBody?,
+        json: String?,
         auth: Boolean,
         then: (String) -> Unit
     ) {
         try {
+            val body = json?.toRequestBody("application/json".toMediaTypeOrNull())
             val req = Request.Builder()
             req.url(getUrl(url))
             req.method(method, body)
@@ -104,7 +141,6 @@ class Tool(val context: Context) {
             Log.e(TAG, "send: 解析错误${e.message}")
         }
     }
-
 
     fun checkToken(fn: (Boolean) -> Unit) {
         send("/prod-api/api/common/user/getInfo", "GET", null, true) {
