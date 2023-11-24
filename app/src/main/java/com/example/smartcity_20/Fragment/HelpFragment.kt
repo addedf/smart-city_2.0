@@ -27,13 +27,14 @@ class HelpFragment : Fragment() {
 
     private fun loadBanner() {
         tool.apply {
-            send("/prod-api/api/gov-service-hotline/ad-banner/list","GET",null,true,HelpBannerBean::class.java) {
-//                val data = g.fromJson(it,HelpBannerBean::class.java).data
-//                val list = mutableListOf<String>()
-//                for (i in data.indices) {
-//                    list.add(data[i].imgUrl)
-//                }
-//                setBanner(vb.helpBanner,list)
+            send("/prod-api/api/gov-service-hotline/ad-banner/list", "GET", null, true) {
+                val data = g.fromJson(it, HelpBannerBean::class.java).data
+                val list = mutableListOf<String>()
+                for (i in data.indices) {
+                    list.add(data[i].imgUrl)
+                }
+                setBanner(vb.helpBanner, list)
+
             }
         }
     }
