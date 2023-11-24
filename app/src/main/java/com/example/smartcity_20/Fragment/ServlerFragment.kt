@@ -41,7 +41,7 @@ class ServlerFragment : Fragment() {
 
     private fun loadService() {
         tool.apply {
-            send("/prod-api/api/service/list", "GET", null, true) {
+            send("/prod-api/api/service/list", "GET", null, false) {
                 val bean = g.fromJson(it, ServiceBean::class.java)
                 val localLawyer = ServiceBean.Data(
                     imgUrl = "/prod-api/profile/upload/image/2023/02/13/dbc84fa3-05ef-476a-8268-422b09eb4866.png",

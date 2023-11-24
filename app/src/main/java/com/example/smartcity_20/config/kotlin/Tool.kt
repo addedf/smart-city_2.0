@@ -42,7 +42,7 @@ class Tool(val context: Context) {
         method: String,
         body: RequestBody?,
         auth: Boolean,
-        clazz: Class<T>?,
+        clazz: Class<T>,
         then: (T) -> Unit
     ) {
         try {
@@ -51,7 +51,6 @@ class Tool(val context: Context) {
             req.method(method, body)
             if (auth) {
                 req.addHeader("Authorization", "Bearer ${get("TOKEN")}")
-                Log.e(TAG, "send: ${get("TOKEN")}")
             }
             client.newCall(req.build()).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
@@ -85,7 +84,6 @@ class Tool(val context: Context) {
             req.method(method, body)
             if (auth) {
                 req.addHeader("Authorization", "Bearer ${get("TOKEN")}")
-                Log.e(TAG, "send: ${get("TOKEN")}")
             }
             client.newCall(req.build()).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
@@ -94,7 +92,6 @@ class Tool(val context: Context) {
 
                 override fun onResponse(call: Call, response: Response) {
                     val str = response.body?.string()
-
                     handler.post {
                         if (str != null) {
                             then(str)
