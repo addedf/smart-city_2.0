@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/hometakeout"
+        android:icon="@drawable/ic_home"
+        android:title="首页" />
+    <item
+        android:id="@+id/ordertakeout"
+        android:icon="@drawable/ic_service"
+        android:title="订单" />
+    <item
+        android:id="@+id/mytakeout"
+        android:icon="@drawable/ic_volunteer"
+        android:title="我的" />
+
+</menu>
