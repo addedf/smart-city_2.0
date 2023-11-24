@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/def"
-    android:orientation="vertical"
-    tools:context=".service.pethospital.HospitalinquiryActivity">
+    tools:context=".service.pethospital.ReadditiondoctorActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
         <TextView
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="医生问诊"
+            android:text="问诊详情"
             android:textSize="@dimen/title"
             android:padding="@dimen/margin"
             android:textColor="@color/white"
@@ -30,12 +31,7 @@
         </TextView>
     </FrameLayout>
 
-    <!--
 
-    页面显示医生头像、医生姓名、医生职称、执业编
-号、问题描述多文本输入框、图片和提交按钮，点击提交按钮时弹出
-提交结果提示，提交成功后跳转至主页面
-    -->
 
     <ImageView
         android:id="@+id/avatar"
@@ -128,29 +124,52 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="问题描述"
+                android:text="咨询描述"
                 android:padding="@dimen/margin"
                 android:textSize="@dimen/title"
                 android:textColor="@color/black">
             </TextView>
 
-            <EditText
-                android:gravity="center"
-                android:id="@+id/Question"
-                android:hint="请输入你的问题"
-                android:background="@drawable/l_yuan_white"
+            <TextView
+                android:gravity="right"
+                android:id="@+id/question"
                 android:layout_width="match_parent"
                 android:padding="@dimen/margin"
                 android:textSize="@dimen/title"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content">
-            </EditText>
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="医生回复"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black">
+            </TextView>
+
+            <TextView
+                android:text="无"
+                android:gravity="right"
+                android:id="@+id/doctorwhy"
+                android:layout_width="match_parent"
+                android:padding="@dimen/margin"
+                android:textSize="@dimen/title"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content">
+            </TextView>
         </LinearLayout>
 
         <TextView
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
-            android:text="提交"
+            android:text="继续提问"
             android:id="@+id/submit"
             android:gravity="center"
             android:textColor="@color/white"

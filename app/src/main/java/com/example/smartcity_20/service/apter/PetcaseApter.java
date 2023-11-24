@@ -1,11 +1,13 @@
 package com.example.smartcity_20.service.apter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,8 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.smartcity_20.R;
+import com.example.smartcity_20.config.java.Common;
 import com.example.smartcity_20.config.java.IpandPort;
 import com.example.smartcity_20.service.bean.PetcaseBean;
+import com.example.smartcity_20.service.pethospital.ReadditiondoctorActivity;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -51,6 +56,17 @@ public class PetcaseApter extends RecyclerView.Adapter<PetcaseApter.Myhot>{
             if(!TextUtils.isEmpty(list.get(position).getQuestion())){
                 holder.question.setText(list.get(position).getQuestion());
             }
+
+            holder.re.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ReadditiondoctorActivity.class);
+                    Gson gson = new Gson();
+                    String json = gson.toJson(list.get(position));
+                    intent.putExtra(Common.ReadditiondoctorActivityID,json);
+                    context.startActivity(intent);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,12 +82,14 @@ public class PetcaseApter extends RecyclerView.Adapter<PetcaseApter.Myhot>{
         private final ImageView imageUrls;
         private final TextView name;
         private final TextView question;
+        private final RelativeLayout re;
 
         public Myhot(@NonNull View itemView) {
             super(itemView);
             imageUrls = itemView.findViewById(R.id.imageUrls);
             name = itemView.findViewById(R.id.name);
             question = itemView.findViewById(R.id.question);
+            re = itemView.findViewById(R.id.re);
         }
     }
 

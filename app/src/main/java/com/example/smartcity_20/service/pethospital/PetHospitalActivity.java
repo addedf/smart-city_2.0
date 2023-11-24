@@ -39,6 +39,12 @@ public class PetHospitalActivity extends AppCompatActivity {
         mytabmethod();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sendcaselist();
+    }
+
     private void mytabmethod() {
         ArrayList<String> stringArrayList = new ArrayList();
         stringArrayList.add("问诊案例");
@@ -48,7 +54,7 @@ public class PetHospitalActivity extends AppCompatActivity {
             tab.setText(s);
             mytab.addTab(tab);
         }
-        sendcaselist();
+
 
         mytab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

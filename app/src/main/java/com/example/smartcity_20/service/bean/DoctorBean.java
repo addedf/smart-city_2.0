@@ -49,7 +49,7 @@ public class DoctorBean {
         private Object updateTime;
         private Object remark;
         private ParamsDTO params;
-        private int id;
+        private Integer id;
         private int typeId;
         private String name;
         private String avatar;
@@ -114,11 +114,11 @@ public class DoctorBean {
             this.params = params;
         }
 
-        public int getId() {
+        public Integer getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(Integer id) {
             this.id = id;
         }
 

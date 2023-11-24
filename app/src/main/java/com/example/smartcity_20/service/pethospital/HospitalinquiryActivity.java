@@ -1,6 +1,7 @@
 package com.example.smartcity_20.service.pethospital;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +10,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.Common;
 import com.example.smartcity_20.config.java.IpandPort;
+import com.example.smartcity_20.config.java.OkHttpRequest;
+import com.example.smartcity_20.me.bean.StatusBean;
+import com.example.smartcity_20.service.apter.PetcaseApter;
 import com.example.smartcity_20.service.bean.DoctorBean;
+import com.example.smartcity_20.service.bean.PetcaseBean;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HospitalinquiryActivity extends AppCompatActivity {
 
@@ -37,6 +46,59 @@ public class HospitalinquiryActivity extends AppCompatActivity {
         initview();
         initmethod();
         img_bloak();
+        submitmethod();
+    }
+
+    private void submitmethod() {
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ed_question = question.getText().toString();
+                Integer id = rowsDTO.getId();
+
+                if(!"".equals(ed_question.trim()) && !TextUtils.isEmpty(ed_question) && id !=null ){
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("doctorId",id);
+                        jsonObject.put("question",ed_question);
+                        sendpost(jsonObject.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    Toast.makeText(context, "内容不能为空", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void sendpost(String JSON) {
+        OkHttpRequest.doNetRequst("prod-api/api/pet-hospital/inquiry",
+                OkHttpRequest.POST,
+                StatusBean.class,
+                new OkHttpRequest.NetRequst() {
+                    @Override
+                    public void ok(Object obj) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                StatusBean status = (StatusBean)obj;
+                                if(status.getCode()==200){
+                                    Toast.makeText(context, "提问成功", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(context, PetHospitalActivity.class);
+                                    context.startActivity(intent);
+                                }else {
+                                    Toast.makeText(context, status.getMsg(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void no(String msg) {
+
+                    }
+                },JSON);
     }
 
     private void initmethod() {
