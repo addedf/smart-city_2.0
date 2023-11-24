@@ -3,4 +3,6 @@ package com.example.smartcity_20.config.java;
 public class Common {
     public static final String NEWXUANQINGACTIVITY = "NEWXUANQINGACTIVITY";
     public static final String QuerypersonalBean = "QuerypersonalBean";
+    public static final String DoctorID = "DoctorID";
+    public static final String HospitalinquiryActivityid = "HospitalinquiryActivityid";
 }

@@ -106,6 +106,8 @@ public class PersonalinformationActivity extends AppCompatActivity {
                                 if(status.getCode()==200){
                                     Toast.makeText(context,"修改成功",Toast.LENGTH_SHORT).show();
                                     context.finish();
+                                }else {
+                                    Toast.makeText(context, status.getMsg(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

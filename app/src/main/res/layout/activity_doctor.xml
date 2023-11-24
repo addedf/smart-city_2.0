@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".service.pethospital.DoctorActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@color/purple_200"
+        android:layout_height="@dimen/toolbar">
+        <ImageView
+            android:id="@+id/ic_back"
+            android:src="@drawable/ic_back"
+            android:layout_width="@dimen/back"
+            android:layout_height="@dimen/back"
+            android:layout_margin="@dimen/margin">
+        </ImageView>
+        <TextView
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="找医生"
+            android:textSize="@dimen/title"
+            android:padding="@dimen/margin"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/doctorlist"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/defaul_bg">
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
