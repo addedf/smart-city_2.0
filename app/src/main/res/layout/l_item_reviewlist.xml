@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/re"
+    android:padding="@dimen/margin"
+    android:layout_height="match_parent">
+
+    <!--
+    用户头像、用户
+昵称、评分值（5 角星标识）、评论内容和评论时间，以及商家回复。
+    -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_marginRight="@dimen/five"
+        android:layout_width="@dimen/icon_size"
+        app:cardCornerRadius="200dp"
+        android:layout_height="@dimen/icon_size">
+        <ImageView
+            android:src="@drawable/waimai"
+            android:id="@+id/avatar"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ImageView>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:text="用户名"
+        android:layout_toRightOf="@+id/card"
+        android:textSize="@dimen/h1"
+        android:textColor="@color/h1color"
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+        android:text="评论时间"
+        android:layout_below="@+id/userName"
+        android:layout_toRightOf="@+id/card"
+        android:textSize="@dimen/h2"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/h2color"
+        android:id="@+id/commentDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <RatingBar
+        android:layout_marginTop="@dimen/five"
+        style="?android:attr/ratingBarStyleSmall"
+        android:id="@+id/reting"
+        android:layout_below="@+id/card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5">
+    </RatingBar>
+
+    <TextView
+        android:text="用户评价"
+        android:layout_below="@+id/reting"
+        android:textSize="@dimen/h3"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/h1color"
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+        android:text="商家回复: 无"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_below="@+id/content"
+        android:textSize="@dimen/h3"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/h1color"
+        android:id="@+id/replyContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <View
+        android:layout_marginTop="@dimen/five"
+        android:layout_below="@+id/replyContent"
+        android:background="@color/h2color"
+        android:layout_width="match_parent"
+        android:layout_height="1px">
+    </View>
+</RelativeLayout>

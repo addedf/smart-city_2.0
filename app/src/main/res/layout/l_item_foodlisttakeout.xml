@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/re"
+    android:padding="@dimen/margin"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="120dp"
+        android:layout_marginRight="@dimen/five"
+        android:id="@+id/card"
+        android:background="@drawable/defaul_bg"
+        android:layout_height="67dp">
+        <ImageView
+            android:scaleType="centerCrop"
+            android:id="@+id/imgUrl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ImageView>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:maxLines="1"
+        android:id="@+id/detail"
+        android:text="菜名"
+        android:textSize="@dimen/h1"
+        android:textColor="@color/h1color"
+        android:layout_toRightOf="@+id/card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/detail"
+        android:id="@+id/price"
+        android:text="价格"
+        android:textSize="@dimen/h2"
+        android:textColor="@color/red"
+        android:layout_toRightOf="@+id/card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/price"
+        android:id="@+id/saleQuantity"
+        android:text="月销售"
+        android:textSize="@dimen/h3"
+        android:textColor="@color/h2color"
+        android:layout_toRightOf="@+id/card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView  android:layout_marginTop="2dp"
+        android:layout_below="@+id/saleQuantity"
+        android:id="@+id/favorRate"
+        android:text="月销售"
+        android:textSize="@dimen/h3"
+        android:textColor="@color/h2color"
+        android:layout_toRightOf="@+id/card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <LinearLayout
+        android:layout_below="@+id/price"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView   android:padding="@dimen/five"
+            android:text="-"
+            android:id="@+id/decreasenum"
+            android:textSize="@dimen/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <EditText
+            android:id="@+id/ed_num"
+            android:text="0"
+            android:inputType="number"
+            android:gravity="center"
+            android:background="@drawable/l_yuan_white"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content">
+        </EditText>
+        <TextView
+            android:id="@+id/addnum"
+            android:padding="@dimen/five"
+            android:text="+"
+            android:textSize="@dimen/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </LinearLayout>
+</RelativeLayout>

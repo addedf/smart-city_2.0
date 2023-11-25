@@ -1,6 +1,7 @@
-package com.example.smartcity_20.service.takeout.Fragment;
+package com.example.smartcity_20.service.takeout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,7 +18,13 @@ import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.Common;
 import com.example.smartcity_20.config.java.IpandPort;
 import com.example.smartcity_20.config.kotlin.Tool;
+import com.example.smartcity_20.service.takeout.apter.FoodlisttakeoutApter;
+import com.example.smartcity_20.service.takeout.apter.FoodtypetakoutApter;
+import com.example.smartcity_20.service.takeout.apter.ReviewlistApter;
+import com.example.smartcity_20.service.takeout.bean.FoodBean;
 import com.example.smartcity_20.service.takeout.bean.FoodlistBean;
+import com.example.smartcity_20.service.takeout.bean.FoodtypetakoutBean;
+import com.example.smartcity_20.service.takeout.bean.ReviewBean;
 import com.example.smartcity_20.service.takeout.bean.VptakeoutBean;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
@@ -48,6 +56,12 @@ public class FoodorderActivity extends AppCompatActivity {
     private TextView name2;
     private RelativeLayout re;
     private Tool tool;
+    private TextView distance2;
+    private TextView saleQuantity2;
+    private RecyclerView foodtypelist;
+    private LinearLayout ll_foodbody;
+    private TextView money;
+    private TextView account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +85,11 @@ public class FoodorderActivity extends AppCompatActivity {
             mytab.addTab(tab);
         }
 
+        //点菜
+        Orderdishes();
+        //菜品分类
+        foodtypemothod();
+
         mytab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -78,6 +97,8 @@ public class FoodorderActivity extends AppCompatActivity {
                 if(typelist.get(0).equals(name)){
                     //点菜
                     Orderdishes();
+                    //菜品分类
+                    foodtypemothod();
                 }else  if(typelist.get(1).equals(name)){
                     //评价
                     reviewmethod();
@@ -101,26 +122,51 @@ public class FoodorderActivity extends AppCompatActivity {
         });
     }
 
-
-    private void reviewmethod() {
+    private void foodtypemothod() {
         re.setVisibility(View.GONE);
-        foodlist.setVisibility(View.GONE);
-        reviewlist.setVisibility(View.VISIBLE);
-
-        /*if(){
-
-        }*/
-        tool.send("/prod-api/api/takeout/comment/list?",
+        ll_foodbody.setVisibility(View.VISIBLE);
+        reviewlist.setVisibility(View.GONE);
+        Integer id = rowsBean.getId();
+        if(id ==null){
+            return;
+        }
+        tool.send("/prod-api/api/takeout/category/list?sellerId="+id,
                 "GET",
                 null,
                 true,
-                VptakeoutBean.class,
-                new Function1<VptakeoutBean, Unit>() {
+                FoodtypetakoutBean.class,
+                new Function1<FoodtypetakoutBean, Unit>() {
                     @Override
-                    public Unit invoke(VptakeoutBean vptakeoutBean) {
-                        if(vptakeoutBean.getCode()==200){
+                    public Unit invoke(FoodtypetakoutBean foodtypetakoutBean) {
+                        if(foodtypetakoutBean.getCode()==200){
+                            foodtypelist.setLayoutManager(new LinearLayoutManager(context));
+                            foodtypelist.setAdapter(new FoodtypetakoutApter(context,foodtypetakoutBean.getData()));
+                        }
+                        return null;
+                    }
+                });
+    }
 
 
+    private void reviewmethod() {
+        re.setVisibility(View.GONE);
+        ll_foodbody.setVisibility(View.GONE);
+        reviewlist.setVisibility(View.VISIBLE);
+        Integer id = rowsBean.getId();
+        if(id ==null){
+            return;
+        }
+        tool.send("/prod-api/api/takeout/comment/list?sellerId="+id,
+                "GET",
+                null,
+                true,
+                ReviewBean.class,
+                new Function1<ReviewBean, Unit>() {
+                    @Override
+                    public Unit invoke(ReviewBean review) {
+                        if(review.getCode()==200){
+                            reviewlist.setLayoutManager(new LinearLayoutManager(context));
+                            reviewlist.setAdapter(new ReviewlistApter(context,review.getRows()));
                         }
                         return null;
                     }
@@ -131,16 +177,32 @@ public class FoodorderActivity extends AppCompatActivity {
 
 
     private void Orderdishes() {
-        re.setVisibility(View.GONE);
-        foodlist.setVisibility(View.VISIBLE);
+        re.setVisibility(View.VISIBLE);
+        ll_foodbody.setVisibility(View.GONE);
         reviewlist.setVisibility(View.GONE);
 
+        //由于api接口文档获取id有问题,这里先写定参数
+        tool.send("/prod-api/api/takeout/product/list?categoryId=5&sellerId=4",
+                "GET",
+                null,
+                true,
+                FoodBean.class,
+                new Function1<FoodBean, Unit>() {
+                    @Override
+                    public Unit invoke(FoodBean foodBean) {
+                        if(foodBean.getCode()==200){
+                            foodlist.setLayoutManager(new LinearLayoutManager(context));
+                            foodlist.setAdapter(new FoodlisttakeoutApter(context,foodBean.getData()));
+                        }
+                        return null;
+                    }
+                });
     }
 
     private void shopmethod() {
         try {
             re.setVisibility(View.VISIBLE);
-            foodlist.setVisibility(View.GONE);
+            ll_foodbody.setVisibility(View.GONE);
             reviewlist.setVisibility(View.GONE);
 
 
@@ -159,6 +221,14 @@ public class FoodorderActivity extends AppCompatActivity {
             }
             if(!TextUtils.isEmpty(rowsBean.getIntroduction())){
                 introduction.setText("商家简介: "+rowsBean.getIntroduction());
+            }
+
+            if(rowsBean.getSaleQuantity() !=null ){
+                saleQuantity2.setText("月销量 "+String.valueOf(rowsBean.getSaleQuantity()));
+            }
+
+            if(rowsBean.getDistance() !=  null){
+                distance2.setText("到店距离: "+String.valueOf(rowsBean.getDistance()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -223,6 +293,13 @@ public class FoodorderActivity extends AppCompatActivity {
         String json = intent.getStringExtra(Common.FoodorderActivity);
         rowsBean = gson.fromJson(json, FoodlistBean.RowsBean.class);
         tool = new Tool(context);
+        saleQuantity2 = findViewById(R.id.saleQuantity2);
+        distance2 = findViewById(R.id.distance2);
+        ll_foodbody = findViewById(R.id.ll_foodbody);
+        foodtypelist = findViewById(R.id.foodtypelist);
+
+        money = findViewById(R.id.money);
+        account = findViewById(R.id.account);
     }
 
     private void img_bloak() {

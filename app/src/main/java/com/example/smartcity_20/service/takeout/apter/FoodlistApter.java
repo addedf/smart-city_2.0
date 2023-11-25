@@ -19,8 +19,7 @@ import com.example.smartcity_20.config.java.Common;
 import com.example.smartcity_20.config.java.IpandPort;
 import com.example.smartcity_20.service.takeout.FoodhotActivity;
 import com.example.smartcity_20.service.takeout.FoodtypeActivity;
-import com.example.smartcity_20.service.takeout.Fragment.FoodorderActivity;
-import com.example.smartcity_20.service.takeout.TakeOutActivity;
+import com.example.smartcity_20.service.takeout.FoodorderActivity;
 import com.example.smartcity_20.service.takeout.bean.FoodlistBean;
 import com.google.gson.Gson;
 

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     android:background="@color/def"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".service.takeout.Fragment.FoodorderActivity">
+    tools:context=".service.takeout.FoodorderActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
         <FrameLayout
             android:layout_width="match_parent"
             android:background="@color/purple_200"
@@ -64,7 +66,6 @@
             </TextView>
 
             <TextView
-
                 android:text="xxx"
                 android:layout_toRightOf="@+id/card"
                 android:textSize="@dimen/h3"
@@ -120,27 +121,101 @@
             android:background="@drawable/defaul_bg"
             android:layout_margin="@dimen/margin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/foodlist"
-                android:background="@color/white"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/ll_foodbody"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+               <androidx.core.widget.NestedScrollView
+                   android:layout_width="wrap_content"
+                   android:layout_height="0dp"
+                   android:layout_weight="1">
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent">
+                      <androidx.recyclerview.widget.RecyclerView
+                          android:id="@+id/foodtypelist"
+                          android:background="@color/white"
+                          android:layout_width="80dp"
+                          android:layout_marginRight="@dimen/five"
+                          android:layout_height="wrap_content">
+                      </androidx.recyclerview.widget.RecyclerView>
+
+                      <androidx.recyclerview.widget.RecyclerView
+                          android:id="@+id/foodlist"
+                          android:background="@color/white"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content">
+                      </androidx.recyclerview.widget.RecyclerView>
+                  </LinearLayout>
+               </androidx.core.widget.NestedScrollView>
+
+                <LinearLayout
+                    android:layout_marginBottom="@dimen/layout_marginVertical"
+                    android:layout_marginHorizontal="@dimen/margin"
+                    android:layout_marginTop="@dimen/layout_marginVertical"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/l_yuan_black"
+                    android:layout_height="@dimen/toolbar">
+
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="200dp"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size">
+                        <ImageView
+                            android:src="@drawable/waimai"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        </ImageView>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_marginLeft="@dimen/margin"
+                        android:textSize="@dimen/h1"
+                        android:layout_gravity="center"
+                        android:text="￥"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </TextView>
+                    <TextView
+                        android:id="@+id/money"
+                        android:textSize="@dimen/h1"
+                        android:layout_gravity="center"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/account"
+                        android:layout_gravity="center"
+                        android:text="点击结算"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/reviewlist"
                 android:visibility="gone"
                 android:background="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
             </androidx.recyclerview.widget.RecyclerView>
 
             <RelativeLayout
                 android:visibility="gone"
                 android:id="@+id/re"
+                android:background="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <androidx.cardview.widget.CardView
                     android:layout_marginRight="@dimen/margin"
@@ -176,11 +251,33 @@
                     android:layout_height="wrap_content">
                 </TextView>
 
+                <TextView  android:layout_marginTop="2dp"
+                    android:text="xxx"
+                    android:layout_toRightOf="@+id/card2"
+                    android:textSize="@dimen/h3"
+                    android:layout_below="@+id/score2"
+                    android:textColor="@color/h2color"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/saleQuantity2"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+                <TextView  android:layout_marginTop="2dp"
+                    android:text="xxx"
+                    android:layout_toRightOf="@+id/card2"
+                    android:textSize="@dimen/h3"
+                    android:layout_below="@+id/saleQuantity2"
+                    android:textColor="@color/h2color"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/distance2"
+                    android:layout_height="wrap_content">
+                </TextView>
+
                 <TextView
                     android:layout_marginTop="@dimen/margin"
                     android:layout_below="@+id/card2"
-                    android:textSize="@dimen/h2"
-                    android:textColor="@color/h2color"
+                    android:textSize="@dimen/h1"
+                    android:textColor="@color/black"
                     android:id="@+id/introduction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -188,4 +285,4 @@
             </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>
