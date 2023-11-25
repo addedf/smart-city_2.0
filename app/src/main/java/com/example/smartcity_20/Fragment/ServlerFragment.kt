@@ -21,6 +21,7 @@ import com.example.smartcity_20.service.takeout.TakeOutActivity
 import java.lang.Exception
 
 class ServlerFragment : Fragment() {
+    //IP = "124.93.196.45"
 //    private val vb by viewBinding { FragmentServlerBinding.inflate(layoutInflater) }
     val TAG = "ServlerFragment"
     private val vb by viewBinding(FragmentServlerBinding::inflate)

@@ -9,4 +9,5 @@ public class Common {
     public static final String FoodtypeActivityid = "FoodtypeActivityid";
     public static final String FoodtypeActivityname = "FoodtypeActivityname";
     public static final String FoodhotActivity = "FoodhotActivity";
+    public static final String FoodorderActivity = "FoodorderActivity";
 }

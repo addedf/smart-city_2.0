@@ -100,8 +100,8 @@ public class ChangepasswordActivity extends AppCompatActivity {
 
                     }
                 },JSON);*/
-        Tool tool = new Tool(ChangepasswordActivity.this);
-        tool.send("/prod-api/api/common/user/resetPwd",
+        new Tool(ChangepasswordActivity.this)
+                .send("/prod-api/api/common/user/resetPwd",
                 "PUT", RequestBody.create(JSON, MediaType.parse("application/json; charset=utf-8")), true, StatusBean.class,
                 new Function1<StatusBean, Unit>() {
                     @Override

@@ -18,7 +18,11 @@ import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.Common;
 import com.example.smartcity_20.config.java.IpandPort;
 import com.example.smartcity_20.service.takeout.FoodhotActivity;
+import com.example.smartcity_20.service.takeout.FoodtypeActivity;
+import com.example.smartcity_20.service.takeout.Fragment.FoodorderActivity;
+import com.example.smartcity_20.service.takeout.TakeOutActivity;
 import com.example.smartcity_20.service.takeout.bean.FoodlistBean;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -26,10 +30,12 @@ public class FoodlistApter extends RecyclerView.Adapter<FoodlistApter.Myhot>{
 
     private Context context;
     private List<FoodlistBean.RowsBean> list;
+    private final Gson gson;
 
     public FoodlistApter(Context context, List<FoodlistBean.RowsBean> list) {
         this.context = context;
         this.list = list;
+        gson = new Gson();
     }
 
     @NonNull
@@ -68,16 +74,34 @@ public class FoodlistApter extends RecyclerView.Adapter<FoodlistApter.Myhot>{
                 holder.avgCost.setText("人均消费: "+String.valueOf(list.get(position).getAvgCost()));
             }
 
-            holder.re.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, FoodhotActivity.class);
-                    if(list.get(position).getId() !=null){
-                        intent.putExtra(Common.FoodhotActivity,String.valueOf(list.get(position).getId()));
-                        context.startActivity(intent);
+
+            if(context instanceof FoodtypeActivity){
+                //进行点单
+                holder.re.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, FoodorderActivity.class);
+                        if(gson !=null && list.get(position)!=null){
+                            String json = gson.toJson(list.get(position));
+                            intent.putExtra(Common.FoodorderActivity,json);
+                            context.startActivity(intent);
+                        }
                     }
-                }
-            });
+                });
+            }else{
+                //进行详情
+                holder.re.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, FoodhotActivity.class);
+                        if(list.get(position).getId() !=null){
+                            intent.putExtra(Common.FoodhotActivity,String.valueOf(list.get(position).getId()));
+                            context.startActivity(intent);
+                        }
+                    }
+                });
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();

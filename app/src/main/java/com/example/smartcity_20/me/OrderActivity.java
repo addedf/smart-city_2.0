@@ -18,15 +18,10 @@ public class OrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order);
         context = this;
         initview();
-        img_bloak();
     }
 
     private void initview() {
         ic_back = findViewById(R.id.ic_back);
-
-    }
-
-    private void img_bloak() {
         ic_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,4 +29,5 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
     }
+
 }

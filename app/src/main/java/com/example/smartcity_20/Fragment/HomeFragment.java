@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
     private TabLayout mytab;
     private Context context;
     private String TAG = "TAG";
+    private HotnewsApter hotnewsApter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +63,7 @@ public class HomeFragment extends Fragment {
     private void islogin() {
         SharedPreferences login = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
         String token = login.getString("TOKEN", "");
-        if(!"".equals(token) && !TextUtils.isEmpty(token)){
+        if(!TextUtils.isEmpty(token) && !"".equals(token.trim())){
             OkHttpRequest.TOKEN=token;
             Log.e(TAG,"Token="+token);
         }
@@ -167,6 +168,8 @@ public class HomeFragment extends Fragment {
                                 if(hotNew.getCode()==200){
                                     newshots.setLayoutManager(new GridLayoutManager(context,2));
                                     newshots.setAdapter(new HotnewsApter(context,hotNew.getRows()));
+                                   // hotnewsApter.setDate(hotNew.getRows());
+                                   // hotnewsApter.notifyDataSetChanged();
                                 }
                             }
                         });
@@ -241,6 +244,10 @@ public class HomeFragment extends Fragment {
         newshots = view.findViewById(R.id.newshots);
         newlist = view.findViewById(R.id.newlist);
         mytab = view.findViewById(R.id.mytab);
+
+//        newshots.setLayoutManager(new GridLayoutManager(context,2));
+//        hotnewsApter = new HotnewsApter(context,new );
+        newshots.setAdapter(hotnewsApter);
 
         context = HomeFragment.this.getContext();
     }

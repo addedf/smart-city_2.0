@@ -49,57 +49,24 @@ public class MeFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_me, container, false);
         initview();
-        islogin();
         querypersonal();
-        Personalinformation();
-        editpwd();
-        feedback();
-        intentorder();
         return view;
     }
 
     private void intentorder() {
-        orderlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, OrderActivity.class);
-                context.startActivity(intent);
-            }
-        });
+
     }
 
     private void feedback() {
-        set_where.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, FeedbackActivity.class);
-                context.startActivity(intent);
-            }
-        });
+
     }
 
     private void editpwd() {
-        setpwd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ChangepasswordActivity.class);
-                 context.startActivity(intent);
-            }
-        });
+
     }
 
     private void Personalinformation() {
-        penosn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, PersonalinformationActivity.class);
-                if (!"".equals(OkHttpRequest.TOKEN) && !TextUtils.isEmpty(OkHttpRequest.TOKEN)) {
-                    String JSON = gson.toJson(queryperson);
-                    intent.putExtra(Common.QuerypersonalBean, JSON);
-                }
-                context.startActivity(intent);
-            }
-        });
+
     }
 
     @Override
@@ -145,7 +112,17 @@ public class MeFragment extends Fragment {
                 });
     }
 
-    private void islogin() {
+
+
+    private void initview() {
+        username = view.findViewById(R.id.username);
+        penosn = view.findViewById(R.id.penosn);
+        orderlist = view.findViewById(R.id.orderlist);
+        setpwd = view.findViewById(R.id.setpwd);
+        set_where = view.findViewById(R.id.set_where);
+        login = view.findViewById(R.id.login);
+        gson = new Gson();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,16 +140,42 @@ public class MeFragment extends Fragment {
 
             }
         });
-    }
 
-    private void initview() {
-        username = view.findViewById(R.id.username);
-        penosn = view.findViewById(R.id.penosn);
-        orderlist = view.findViewById(R.id.orderlist);
-        setpwd = view.findViewById(R.id.setpwd);
-        set_where = view.findViewById(R.id.set_where);
-        login = view.findViewById(R.id.login);
-        gson = new Gson();
+        penosn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PersonalinformationActivity.class);
+                if (!"".equals(OkHttpRequest.TOKEN) && !TextUtils.isEmpty(OkHttpRequest.TOKEN)) {
+                    String JSON = gson.toJson(queryperson);
+                    intent.putExtra(Common.QuerypersonalBean, JSON);
+                }
+                context.startActivity(intent);
+            }
+        });
+
+        setpwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ChangepasswordActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        set_where.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, FeedbackActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        orderlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, OrderActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
         context = this.getContext();
         sharedpreferences = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
