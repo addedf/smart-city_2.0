@@ -63,6 +63,7 @@ public class YIDaoActivity extends AppCompatActivity {
     private void gethome() {
         Intent intent = new Intent(YIDaoActivity.this,MainActivity.class);
         this.startActivity(intent);
+        this.finish();
     }
 
 
