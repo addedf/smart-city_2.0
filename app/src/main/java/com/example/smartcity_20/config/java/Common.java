@@ -10,4 +10,7 @@ public class Common {
     public static final String FoodtypeActivityname = "FoodtypeActivityname";
     public static final String FoodhotActivity = "FoodhotActivity";
     public static final String FoodorderActivity = "FoodorderActivity";
+    public static final String numlist = "numlist";
+    public static final String money = "money";
+    public static final String shopname = "shopname";
 }

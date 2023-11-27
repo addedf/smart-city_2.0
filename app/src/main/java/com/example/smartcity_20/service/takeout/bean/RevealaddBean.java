@@ -2,19 +2,16 @@ package com.example.smartcity_20.service.takeout.bean;
 
 import java.util.List;
 
-public class FoodBean {
+public class RevealaddBean {
 
     private String msg;
     private int code;
     private List<DataDTO> data;
 
-    @Override
-    public String toString() {
-        return "FoodBean{" +
-                "msg='" + msg + '\'' +
-                ", code=" + code +
-                ", data=" + data +
-                '}';
+    public RevealaddBean(String msg, int code, List<DataDTO> data) {
+        this.msg = msg;
+        this.code = code;
+        this.data = data;
     }
 
     public String getMsg() {
@@ -49,17 +46,13 @@ public class FoodBean {
         private String updateTime;
         private Object remark;
         private ParamsDTO params;
-        private Integer id;
-        private Integer categoryId;
-        private String imgUrl;
+        private int id;
+        private int userId;
         private String name;
-        private Double price;
-        private String detail;
-        private String status;
-        private Integer saleQuantity;
-        private Double favorRate;
-        private Integer sellerId;
-        private Integer  nums =0;
+        private String phone;
+        private String addressDetail;
+        private String houseNumber;
+        private String label;
 
         @Override
         public String toString() {
@@ -72,25 +65,13 @@ public class FoodBean {
                     ", remark=" + remark +
                     ", params=" + params +
                     ", id=" + id +
-                    ", categoryId=" + categoryId +
-                    ", imgUrl='" + imgUrl + '\'' +
+                    ", userId=" + userId +
                     ", name='" + name + '\'' +
-                    ", price=" + price +
-                    ", detail='" + detail + '\'' +
-                    ", status='" + status + '\'' +
-                    ", saleQuantity=" + saleQuantity +
-                    ", favorRate=" + favorRate +
-                    ", sellerId=" + sellerId +
-                    ", nums=" + nums +
+                    ", phone='" + phone + '\'' +
+                    ", addressDetail='" + addressDetail + '\'' +
+                    ", houseNumber='" + houseNumber + '\'' +
+                    ", label='" + label + '\'' +
                     '}';
-        }
-
-        public Integer getNums() {
-            return nums;
-        }
-
-        public void setNums(Integer nums) {
-            this.nums = nums;
         }
 
         public Object getSearchValue() {
@@ -149,28 +130,20 @@ public class FoodBean {
             this.params = params;
         }
 
-        public Integer getId() {
+        public int getId() {
             return id;
         }
 
-        public void setId(Integer id) {
+        public void setId(int id) {
             this.id = id;
         }
 
-        public Integer getCategoryId() {
-            return categoryId;
+        public int getUserId() {
+            return userId;
         }
 
-        public void setCategoryId(int categoryId) {
-            this.categoryId = categoryId;
-        }
-
-        public String getImgUrl() {
-            return imgUrl;
-        }
-
-        public void setImgUrl(String imgUrl) {
-            this.imgUrl = imgUrl;
+        public void setUserId(int userId) {
+            this.userId = userId;
         }
 
         public String getName() {
@@ -181,54 +154,37 @@ public class FoodBean {
             this.name = name;
         }
 
-        public Double getPrice() {
-            return price;
+        public String getPhone() {
+            return phone;
         }
 
-        public void setPrice(Double price) {
-            this.price = price;
+        public void setPhone(String phone) {
+            this.phone = phone;
         }
 
-        public String getDetail() {
-            return detail;
+        public String getAddressDetail() {
+            return addressDetail;
         }
 
-        public void setDetail(String detail) {
-            this.detail = detail;
+        public void setAddressDetail(String addressDetail) {
+            this.addressDetail = addressDetail;
         }
 
-        public String getStatus() {
-            return status;
+        public String getHouseNumber() {
+            return houseNumber;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
+        public void setHouseNumber(String houseNumber) {
+            this.houseNumber = houseNumber;
         }
 
-        public Integer getSaleQuantity() {
-            return saleQuantity;
+        public String getLabel() {
+            return label;
         }
 
-        public void setSaleQuantity(Integer saleQuantity) {
-            this.saleQuantity = saleQuantity;
+        public void setLabel(String label) {
+            this.label = label;
         }
-
-        public Double getFavorRate() {
-            return favorRate;
-        }
-
-        public void setFavorRate(double favorRate) {
-            this.favorRate = favorRate;
-        }
-
-        public Integer getSellerId() {
-            return sellerId;
-        }
-
-        public void setSellerId(Integer sellerId) {
-            this.sellerId = sellerId;
-        }
-
 
         public static class ParamsDTO {
         }

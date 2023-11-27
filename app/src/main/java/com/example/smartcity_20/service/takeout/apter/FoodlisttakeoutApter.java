@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.IpandPort;
+import com.example.smartcity_20.service.takeout.FoodorderActivity;
 import com.example.smartcity_20.service.takeout.bean.FoodBean;
 import com.example.smartcity_20.service.takeout.bean.FoodtypetakoutBean;
 
@@ -38,6 +40,20 @@ public class FoodlisttakeoutApter extends RecyclerView.Adapter<FoodlisttakeoutAp
         return new FoodlisttakeoutApter.Myhot(inflate);
     }
 
+    public void account(){
+        double money =  0.0;
+        try {
+            for (FoodBean.DataDTO dataDTO : list) {
+                money=money+dataDTO.getNums()*dataDTO.getPrice();
+            }
+            if(context instanceof FoodorderActivity){
+                FoodorderActivity foodorder =  (FoodorderActivity)context;
+                foodorder.displayprice(String.valueOf(money),list);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void onBindViewHolder(@NonNull FoodlisttakeoutApter.Myhot holder, int position) {
         try {
@@ -63,6 +79,34 @@ public class FoodlisttakeoutApter extends RecyclerView.Adapter<FoodlisttakeoutAp
             if(list.get(position).getFavorRate()!=null ){
                 holder.favorRate.setText("好评率: "+String.valueOf(list.get(position).getFavorRate()));
             }
+
+            holder.addnum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int  nums = list.get(position).getNums();
+                    if(nums>=0){
+                        nums++;
+                        list.get(position).setNums(nums);
+                        holder.ed_num.setText(String.valueOf(nums));
+                        account();
+                    }
+                }
+            });
+
+            holder.decreasenum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int nums = list.get(position).getNums();
+                    if(nums>0 ){
+                        nums--;
+                        list.get(position).setNums(nums);
+                        holder.ed_num.setText(String.valueOf(nums));
+                        account();
+                    }else {
+                        Toast.makeText(context,"数量必须大于0",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }

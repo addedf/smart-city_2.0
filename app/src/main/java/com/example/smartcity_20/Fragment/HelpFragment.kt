@@ -56,7 +56,6 @@ class HelpFragment : Fragment() {
                     list.add(data[i].imgUrl)
                 }
                 setBanner(vb.helpBanner, list)
-
             }
         }
     }
