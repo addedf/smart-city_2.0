@@ -329,7 +329,7 @@ public class FoodorderActivity extends AppCompatActivity {
                         intent.putExtra(Common.numlist,numsjson);
                         intent.putExtra(Common.money,substring);
                         intent.putExtra(Common.shopname,rowsBean.getName());
-                        context.startActivity(intent);
+                            context.startActivity(intent);
                     }else {
                         Toast.makeText(context,"请选择菜品",Toast.LENGTH_SHORT).show();
                     }
