@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:backgroundTint="@color/def"
+    android:background="@color/def"
     tools:context=".service.house.HouseActivity">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -21,4 +21,32 @@
             android:text="找房子"
             android:layout_gravity="center"/>
     </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar"
+                android:id="@+id/house_search"
+                android:layout_marginHorizontal="@dimen/layout_marginVertical"
+                android:background="@drawable/defaul_bg"
+                android:layout_marginTop="@dimen/margin"/>
+             <androidx.recyclerview.widget.RecyclerView
+                 android:layout_width="match_parent"
+                 android:layout_margin="@dimen/margin"
+                 android:background="@drawable/defaul_bg"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/house_tab"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/defaul_bg"
+                android:layout_marginHorizontal="@dimen/margin"
+                android:id="@+id/house_list"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

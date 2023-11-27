@@ -17,7 +17,6 @@ import java.io.IOException
 import java.lang.Exception
 import java.util.*
 
-// TODO("记不住")
 class Tool(val context: Context) {
     companion object {
         const val TAG = "Tool"
@@ -42,12 +41,13 @@ class Tool(val context: Context) {
     fun <T> send(
         url: String,
         method: String,
-        body: RequestBody?,
+        json: String?,
         auth: Boolean,
         clazz: Class<T>,
         then: (T) -> Unit
     ) {
         try {
+            val body = json?.toRequestBody("application/json".toMediaTypeOrNull())
             val req = Request.Builder()
             req.url(getUrl(url))
             req.method(method, body)

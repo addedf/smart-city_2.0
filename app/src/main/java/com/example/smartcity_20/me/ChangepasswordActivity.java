@@ -102,7 +102,7 @@ public class ChangepasswordActivity extends AppCompatActivity {
                 },JSON);*/
         new Tool(ChangepasswordActivity.this)
                 .send("/prod-api/api/common/user/resetPwd",
-                "PUT", RequestBody.create(JSON, MediaType.parse("application/json; charset=utf-8")), true, StatusBean.class,
+                "PUT",JSON , true, StatusBean.class,
                 new Function1<StatusBean, Unit>() {
                     @Override
                     public Unit invoke(StatusBean statusBean) {
