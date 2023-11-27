@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.smartcity_20.R;
@@ -25,11 +26,12 @@ import com.example.smartcity_20.service.takeout.bean.FoodBean;
 import com.example.smartcity_20.service.takeout.bean.FoodlistBean;
 import com.example.smartcity_20.service.takeout.bean.FoodtypetakoutBean;
 import com.example.smartcity_20.service.takeout.bean.ReviewBean;
-import com.example.smartcity_20.service.takeout.bean.VptakeoutBean;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -62,6 +64,9 @@ public class FoodorderActivity extends AppCompatActivity {
     private LinearLayout ll_foodbody;
     private TextView money;
     private TextView account;
+    private String  TAG ="TAG";
+    private List<FoodBean.DataDTO> numlist;
+    private String substring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +114,6 @@ public class FoodorderActivity extends AppCompatActivity {
             }
 
 
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
@@ -122,6 +126,19 @@ public class FoodorderActivity extends AppCompatActivity {
         });
     }
 
+
+    public void displayprice(String moneyapter,List<FoodBean.DataDTO> list){
+        substring = moneyapter.substring(0, moneyapter.indexOf(".")+2);
+        Iterator<FoodBean.DataDTO> iterator = list.iterator();
+        numlist = new ArrayList();
+        while (iterator.hasNext()) {
+            FoodBean.DataDTO next = iterator.next();
+            if(next.getNums()!=0){
+                numlist.add(next);
+            }
+        }
+        money.setText(substring);
+    }
     private void foodtypemothod() {
         re.setVisibility(View.GONE);
         ll_foodbody.setVisibility(View.VISIBLE);
@@ -300,6 +317,27 @@ public class FoodorderActivity extends AppCompatActivity {
 
         money = findViewById(R.id.money);
         account = findViewById(R.id.account);
+
+
+        ll_foodbody.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(context, BillingpageActivity.class);
+                    if(numlist!=null &&  !TextUtils.isEmpty(substring) && !"0.0".equals(substring.trim())){
+                        String numsjson = gson.toJson(numlist);
+                        intent.putExtra(Common.numlist,numsjson);
+                        intent.putExtra(Common.money,substring);
+                        intent.putExtra(Common.shopname,rowsBean.getName());
+                        context.startActivity(intent);
+                    }else {
+                        Toast.makeText(context,"请选择菜品",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void img_bloak() {

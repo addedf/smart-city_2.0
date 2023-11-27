@@ -8,6 +8,15 @@ public class FoodBean {
     private int code;
     private List<DataDTO> data;
 
+    @Override
+    public String toString() {
+        return "FoodBean{" +
+                "msg='" + msg + '\'' +
+                ", code=" + code +
+                ", data=" + data +
+                '}';
+    }
+
     public String getMsg() {
         return msg;
     }
@@ -50,6 +59,39 @@ public class FoodBean {
         private Integer saleQuantity;
         private Double favorRate;
         private Integer sellerId;
+        private Integer  nums =0;
+
+        @Override
+        public String toString() {
+            return "DataDTO{" +
+                    "searchValue=" + searchValue +
+                    ", createBy=" + createBy +
+                    ", createTime='" + createTime + '\'' +
+                    ", updateBy=" + updateBy +
+                    ", updateTime='" + updateTime + '\'' +
+                    ", remark=" + remark +
+                    ", params=" + params +
+                    ", id=" + id +
+                    ", categoryId=" + categoryId +
+                    ", imgUrl='" + imgUrl + '\'' +
+                    ", name='" + name + '\'' +
+                    ", price=" + price +
+                    ", detail='" + detail + '\'' +
+                    ", status='" + status + '\'' +
+                    ", saleQuantity=" + saleQuantity +
+                    ", favorRate=" + favorRate +
+                    ", sellerId=" + sellerId +
+                    ", nums=" + nums +
+                    '}';
+        }
+
+        public Integer getNums() {
+            return nums;
+        }
+
+        public void setNums(Integer nums) {
+            this.nums = nums;
+        }
 
         public Object getSearchValue() {
             return searchValue;
