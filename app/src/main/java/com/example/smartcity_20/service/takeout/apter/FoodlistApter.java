@@ -83,6 +83,7 @@ public class FoodlistApter extends RecyclerView.Adapter<FoodlistApter.Myhot>{
                         if(gson !=null && list.get(position)!=null){
                             String json = gson.toJson(list.get(position));
                             intent.putExtra(Common.FoodorderActivity,json);
+                            intent.putExtra(Common.Foodorderid,String.valueOf(position));
                             context.startActivity(intent);
                         }
                     }

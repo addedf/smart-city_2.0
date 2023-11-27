@@ -209,7 +209,7 @@ public class FoodorderActivity extends AppCompatActivity {
                     public Unit invoke(FoodBean foodBean) {
                         if(foodBean.getCode()==200){
                             foodlist.setLayoutManager(new LinearLayoutManager(context));
-                            foodlist.setAdapter(new FoodlisttakeoutApter(context,foodBean.getData()));
+                            foodlist.setAdapter(new FoodlisttakeoutApter(context, foodBean.getData()));
                         }
                         return null;
                     }
@@ -308,6 +308,7 @@ public class FoodorderActivity extends AppCompatActivity {
         gson = new Gson();
         Intent intent = getIntent();
         String json = intent.getStringExtra(Common.FoodorderActivity);
+        String Foodorderid = intent.getStringExtra(Common.Foodorderid);
         rowsBean = gson.fromJson(json, FoodlistBean.RowsBean.class);
         tool = new Tool(context);
         saleQuantity2 = findViewById(R.id.saleQuantity2);
@@ -329,7 +330,8 @@ public class FoodorderActivity extends AppCompatActivity {
                         intent.putExtra(Common.numlist,numsjson);
                         intent.putExtra(Common.money,substring);
                         intent.putExtra(Common.shopname,rowsBean.getName());
-                            context.startActivity(intent);
+                        intent.putExtra(Common.Foodorderid,Foodorderid);
+                        context.startActivity(intent);
                     }else {
                         Toast.makeText(context,"请选择菜品",Toast.LENGTH_SHORT).show();
                     }

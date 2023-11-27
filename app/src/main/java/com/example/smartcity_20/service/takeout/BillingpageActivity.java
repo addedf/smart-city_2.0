@@ -29,12 +29,15 @@ import com.example.smartcity_20.service.takeout.apter.AddeliveryaddressApter;
 import com.example.smartcity_20.service.takeout.apter.CarteApter;
 import com.example.smartcity_20.service.takeout.bean.FoodBean;
 import com.example.smartcity_20.service.takeout.bean.RevealaddBean;
+import com.example.smartcity_20.service.takeout.bean.TakeoutorderBean;
+import com.example.smartcity_20.service.takeout.bean.TakeoutordernumberBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kotlin.Unit;
@@ -79,6 +82,7 @@ public class BillingpageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String money = intent.getStringExtra(Common.money);
         String numlist = intent.getStringExtra(Common.numlist);
+        int  Foodorderid = Integer.parseInt(intent.getStringExtra(Common.Foodorderid));
         String str_shopname = intent.getStringExtra(Common.shopname);
         dataDTO = gson.fromJson(numlist, new TypeToken<List<FoodBean.DataDTO>>() {}.getType());
         shopname = findViewById(R.id.shopname);
@@ -141,9 +145,38 @@ public class BillingpageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     if(dataDTO!=null && !"0.0".equals(money.trim()) &&  revealaddBean!=null){
-                        Intent intent = new Intent(context,PaymentActivity.class);
-                        intent.putExtra(Common.money,money);
-                        context.startActivity(intent);
+
+                        TakeoutorderBean takeoutorderBean = new TakeoutorderBean();
+                        takeoutorderBean.setAddressDetail(revealaddBean.getAddressDetail());
+                        takeoutorderBean.setLabel(revealaddBean.getLabel());
+                        takeoutorderBean.setName(revealaddBean.getName());
+                        takeoutorderBean.setPhone(revealaddBean.getPhone());
+                        takeoutorderBean.setPhone(revealaddBean.getPhone());
+                        takeoutorderBean.setAmount(money);
+
+                        takeoutorderBean.setSellerId(dataDTO.get(Foodorderid).getId());
+
+                        ArrayList<TakeoutorderBean.OrderItemListBean> arrayList = new ArrayList();
+                        for (FoodBean.DataDTO dto : dataDTO) {
+                            TakeoutorderBean.OrderItemListBean orderItemListBean = new TakeoutorderBean.OrderItemListBean();
+                            //菜品
+                            orderItemListBean.setProductId(dto.getId());
+                            //购买数量
+                            orderItemListBean.setQuantity(dto.getNums());
+                            arrayList.add(orderItemListBean);
+                        }
+                        takeoutorderBean.setOrderItemList(arrayList);
+                        Log.e(TAG,"takeoutorderBean"+takeoutorderBean.toString());
+                        /*JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("addressDetail",revealaddBean.getAddressDetail());
+                        jsonObject.put("label",revealaddBean.getLabel());
+                        jsonObject.put("name",revealaddBean.getName());
+                        jsonObject.put("phone",revealaddBean.getPhone());
+                        jsonObject.put("amount",money);*/
+                        createorder(gson.toJson(takeoutorderBean));
+                        //Intent intent = new Intent(context,PaymentActivity.class);
+                       //intent.putExtra(Common.money,money);
+                        //context.startActivity(intent);
                     }else {
                         Toast.makeText(context, "提交失败", Toast.LENGTH_SHORT).show();
                     }
@@ -154,6 +187,23 @@ public class BillingpageActivity extends AppCompatActivity {
         });
     }
 
+    private void createorder(String JSON) {
+        tool.send("prod-api/api/takeout/order/create",
+                "POST",
+                JSON,
+                true, TakeoutordernumberBean.class,
+                new Function1<TakeoutordernumberBean, Unit>() {
+                    @Override
+                    public Unit invoke(TakeoutordernumberBean takeoutordernumberBean) {
+                        if(takeoutordernumberBean.getCode()==200){
+
+                        }else {
+                            Toast.makeText(context,takeoutordernumberBean.getMsg(),Toast.LENGTH_SHORT).show();
+                        }
+                        return null;
+                    }
+                });
+    }
 
 
     //刷新选择的收货地址
