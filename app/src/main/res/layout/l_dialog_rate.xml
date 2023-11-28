@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:background="@color/def"
+    android:padding="@dimen/margin"
+    android:layout_height="match_parent">
 
+
+    <TextView
+        android:id="@+id/name"
+        android:textColor="@color/h1color"
+        android:textSize="@dimen/h1"
+        android:text="评价商家"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <EditText
+        android:hint="请输入对本次点餐的评价"
+        android:background="@drawable/l_yuan_white"
+        android:layout_below="@+id/name"
+        android:id="@+id/ed_rete"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+    </EditText>
+
+    <RatingBar
+        android:id="@+id/bar"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:numStars="5"
+        android:layout_below="@id/ed_rete"
+        android:layout_height="wrap_content">
+    </RatingBar>
 </RelativeLayout>

@@ -15,4 +15,5 @@ public class Common {
     public static final String shopname = "shopname";
     public static final String ordernumber = "ordernumber";
     public static final String moneytotality = "moneytotality";
+    public static final String OrderdetailsActivityid = "OrderdetailsActivityid";
 }

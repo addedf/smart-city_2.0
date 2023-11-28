@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/def"
+    android:layout_height="match_parent"
+    tools:context=".service.takeout.OrderdetailsActivity">
+
+
+    <FrameLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:background="@color/purple_200"
+        android:layout_height="@dimen/toolbar">
+        <ImageView
+            android:id="@+id/ic_back"
+            android:src="@drawable/ic_back"
+            android:layout_width="@dimen/back"
+            android:layout_height="@dimen/back"
+            android:layout_margin="@dimen/margin">
+        </ImageView>
+        <TextView
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="订单详情"
+            android:textSize="@dimen/title"
+            android:padding="@dimen/margin"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_margin="@dimen/margin"
+        android:id="@+id/ll2"
+        android:layout_below="@+id/ll1"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="店名"
+            android:textColor="@color/black"
+            android:textSize="14dp">
+        </TextView>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+           <LinearLayout
+               android:orientation="vertical"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/refoodlist"
+                   android:background="@color/white"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+               </androidx.recyclerview.widget.RecyclerView>
+
+               <TextView
+                   android:id="@+id/monrytotle"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="xxx"
+                   android:gravity="right"
+                   android:textColor="@color/black"
+                   android:textSize="14dp">
+               </TextView>
+           </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginHorizontal="@dimen/margin"
+        android:padding="@dimen/margin"
+        android:background="@drawable/defaul_bg"
+        android:id="@+id/ll3"
+        android:paddingHorizontal="8dp"
+        android:layout_below="@+id/ll2"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/five">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="配送地址"
+                android:textSize="@dimen/h1"
+                android:textColor="@color/h1color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <TextView
+                android:id="@+id/receiverAddress"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textSize="@dimen/h1"
+                android:textColor="@color/h1color"
+                android:layout_height="wrap_content"
+                android:text="xxxx">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/five"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+
+                android:text="配送号码"
+                android:textSize="@dimen/h1"
+                android:textColor="@color/h1color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <TextView
+                android:id="@+id/receiverPhone"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="xxxx">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/five"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="支付时间"
+                android:textSize="@dimen/h1"
+                android:textColor="@color/h1color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <TextView
+                android:id="@+id/payTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="xxxx">
+            </TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/five"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+
+                android:text="订单号"
+                android:textSize="@dimen/h1"
+                android:textColor="@color/h1color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <TextView
+                android:id="@+id/orderNo"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="xxxx">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/five"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="支付方式"
+
+                android:textSize="@dimen/h1"
+                android:textColor="@color/h1color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <TextView
+                android:id="@+id/paymentType"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="xxxx">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/five"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="订单状态"
+                android:textSize="@dimen/h1"
+                android:textColor="@color/h1color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="xxxx">
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

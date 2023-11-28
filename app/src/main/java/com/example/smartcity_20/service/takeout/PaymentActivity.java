@@ -84,6 +84,8 @@ public class PaymentActivity extends AppCompatActivity {
                         jsonObject.put("orderNo",ordernumber);
                         jsonObject.put("paymentType",paymenttype);
                         sendpost(jsonObject.toString());
+                    }else{
+                        Toast.makeText(context, "请选择支付类型", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

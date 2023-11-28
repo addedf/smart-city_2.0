@@ -1,6 +1,7 @@
 package com.example.smartcity_20.service.takeout.apter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.smartcity_20.R;
+import com.example.smartcity_20.config.java.Common;
 import com.example.smartcity_20.config.java.IpandPort;
+import com.example.smartcity_20.service.takeout.OrderdetailsActivity;
 import com.example.smartcity_20.service.takeout.bean.GoodsnumberBean;
 
 import java.util.List;
@@ -56,6 +59,14 @@ public class goodlistApter extends RecyclerView.Adapter<goodlistApter.Myhot> {
                 holder.name.setText(orderItemListDTO.getProductName());
             }
 
+            holder.re.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, OrderdetailsActivity.class);
+                    intent.putExtra(Common.OrderdetailsActivityid,orderItemListDTO.getOrderNo());
+                    context.startActivity(intent);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,12 +81,14 @@ public class goodlistApter extends RecyclerView.Adapter<goodlistApter.Myhot> {
 
         private final ImageView imgUrl;
         private final TextView name;
+        private final RelativeLayout re;
 
 
         public Myhot(@NonNull View itemView) {
             super(itemView);
             imgUrl = itemView.findViewById(R.id.imgUrl);
             name = itemView.findViewById(R.id.name);
+            re = itemView.findViewById(R.id.re);
         }
     }
 
