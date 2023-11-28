@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical"
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/def"
     tools:context=".service.takeout.PaymentActivity">
 
 
     <FrameLayout
+        android:id="@+id/head"
         android:layout_width="match_parent"
         android:background="@color/purple_200"
         android:layout_height="@dimen/toolbar">
@@ -31,4 +34,86 @@
         </TextView>
     </FrameLayout>
 
+
+      <FrameLayout
+          android:layout_below="@+id/head"
+
+          android:layout_centerHorizontal="true"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+          <TextView
+              android:padding="@dimen/margin"
+
+              android:layout_gravity="center"
+              android:layout_toLeftOf="@+id/money"
+              android:text="￥"
+              android:textColor="@color/black"
+              android:layout_marginTop="20dp"
+              android:layout_marginBottom="10dp"
+              android:layout_below="@+id/money"
+              android:layout_marginRight="50dp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+          </TextView>
+          <TextView
+              android:layout_gravity="center"
+              android:padding="@dimen/layout_marginVertical"
+              android:id="@+id/money"
+              android:text="0.0"
+              android:textColor="@color/black"
+              android:textSize="30dp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+          </TextView>
+      </FrameLayout>
+
+    <RadioGroup
+        android:background="@color/def"
+        android:layout_margin="@dimen/margin"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/ra"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/ra1"
+            android:background="@color/white"
+            android:padding="@dimen/margin"
+            android:text="电子钱包"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/ra2"
+            android:background="@color/white"
+            android:layout_marginTop="2dp"
+            android:padding="@dimen/margin"
+            android:text="微信"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/ra3"
+            android:background="@color/white"
+            android:layout_marginTop="2dp"
+            android:padding="@dimen/margin"
+            android:text="支付宝"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RadioButton>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/submit"
+        android:padding="@dimen/margin"
+        android:text="点击支付"
+        android:background="@drawable/btn_shape"
+        android:textColor="@color/white"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/layout_marginVertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
 </LinearLayout>

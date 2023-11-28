@@ -62,6 +62,7 @@ public class BillingpageActivity extends AppCompatActivity {
     private TextView shopname;
     private FrameLayout fr;
     private RevealaddBean.DataDTO revealaddBean;
+    private String money;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +81,9 @@ public class BillingpageActivity extends AppCompatActivity {
     private void initview() {
         Gson gson = new Gson();
         Intent intent = getIntent();
-        String money = intent.getStringExtra(Common.money);
+        money = intent.getStringExtra(Common.money);
         String numlist = intent.getStringExtra(Common.numlist);
-        int  Foodorderid = Integer.parseInt(intent.getStringExtra(Common.Foodorderid));
+       // int  Foodorderid = Integer.parseInt(intent.getStringExtra(Common.Foodorderid));
         String str_shopname = intent.getStringExtra(Common.shopname);
         dataDTO = gson.fromJson(numlist, new TypeToken<List<FoodBean.DataDTO>>() {}.getType());
         shopname = findViewById(R.id.shopname);
@@ -144,7 +145,7 @@ public class BillingpageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    if(dataDTO!=null && !"0.0".equals(money.trim()) &&  revealaddBean!=null){
+                    if(dataDTO!=null &&  revealaddBean!=null){
 
                         TakeoutorderBean takeoutorderBean = new TakeoutorderBean();
                         takeoutorderBean.setAddressDetail(revealaddBean.getAddressDetail());
@@ -154,7 +155,7 @@ public class BillingpageActivity extends AppCompatActivity {
                         takeoutorderBean.setPhone(revealaddBean.getPhone());
                         takeoutorderBean.setAmount(money);
 
-                        takeoutorderBean.setSellerId(dataDTO.get(Foodorderid).getId());
+                        takeoutorderBean.setSellerId(dataDTO.get(0).getSellerId());
 
                         ArrayList<TakeoutorderBean.OrderItemListBean> arrayList = new ArrayList();
                         for (FoodBean.DataDTO dto : dataDTO) {
@@ -166,19 +167,12 @@ public class BillingpageActivity extends AppCompatActivity {
                             arrayList.add(orderItemListBean);
                         }
                         takeoutorderBean.setOrderItemList(arrayList);
-                        Log.e(TAG,"takeoutorderBean"+takeoutorderBean.toString());
-                        /*JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("addressDetail",revealaddBean.getAddressDetail());
-                        jsonObject.put("label",revealaddBean.getLabel());
-                        jsonObject.put("name",revealaddBean.getName());
-                        jsonObject.put("phone",revealaddBean.getPhone());
-                        jsonObject.put("amount",money);*/
+                        Log.e(TAG,takeoutorderBean.toString());
+
                         createorder(gson.toJson(takeoutorderBean));
-                        //Intent intent = new Intent(context,PaymentActivity.class);
-                       //intent.putExtra(Common.money,money);
-                        //context.startActivity(intent);
+
                     }else {
-                        Toast.makeText(context, "提交失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "地址不能为空", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -188,7 +182,7 @@ public class BillingpageActivity extends AppCompatActivity {
     }
 
     private void createorder(String JSON) {
-        tool.send("prod-api/api/takeout/order/create",
+        tool.send("/prod-api/api/takeout/order/create",
                 "POST",
                 JSON,
                 true, TakeoutordernumberBean.class,
@@ -196,7 +190,10 @@ public class BillingpageActivity extends AppCompatActivity {
                     @Override
                     public Unit invoke(TakeoutordernumberBean takeoutordernumberBean) {
                         if(takeoutordernumberBean.getCode()==200){
-
+                            Intent intent = new Intent(context,PaymentActivity.class);
+                            intent.putExtra(Common.ordernumber,takeoutordernumberBean.getOrderNo());
+                            intent.putExtra(Common.moneytotality,money);
+                            context.startActivity(intent);
                         }else {
                             Toast.makeText(context,takeoutordernumberBean.getMsg(),Toast.LENGTH_SHORT).show();
                         }

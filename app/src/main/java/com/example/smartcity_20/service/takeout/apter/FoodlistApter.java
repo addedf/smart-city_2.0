@@ -73,7 +73,6 @@ public class FoodlistApter extends RecyclerView.Adapter<FoodlistApter.Myhot>{
                 holder.avgCost.setText("人均消费: "+String.valueOf(list.get(position).getAvgCost()));
             }
 
-
             if(context instanceof FoodtypeActivity){
                 //进行点单
                 holder.re.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +82,7 @@ public class FoodlistApter extends RecyclerView.Adapter<FoodlistApter.Myhot>{
                         if(gson !=null && list.get(position)!=null){
                             String json = gson.toJson(list.get(position));
                             intent.putExtra(Common.FoodorderActivity,json);
-                            intent.putExtra(Common.Foodorderid,String.valueOf(position));
+                            //intent.putExtra(Common.Foodorderid,String.valueOf(position));
                             context.startActivity(intent);
                         }
                     }

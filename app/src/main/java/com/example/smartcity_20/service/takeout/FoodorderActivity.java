@@ -128,7 +128,8 @@ public class FoodorderActivity extends AppCompatActivity {
 
 
     public void displayprice(String moneyapter,List<FoodBean.DataDTO> list){
-        substring = moneyapter.substring(0, moneyapter.indexOf(".")+2);
+        //substring = moneyapter.substring(0, moneyapter.indexOf(".")+2);
+        substring = moneyapter;
         Iterator<FoodBean.DataDTO> iterator = list.iterator();
         numlist = new ArrayList();
         while (iterator.hasNext()) {
@@ -308,7 +309,7 @@ public class FoodorderActivity extends AppCompatActivity {
         gson = new Gson();
         Intent intent = getIntent();
         String json = intent.getStringExtra(Common.FoodorderActivity);
-        String Foodorderid = intent.getStringExtra(Common.Foodorderid);
+     //   String Foodorderid = intent.getStringExtra(Common.Foodorderid);
         rowsBean = gson.fromJson(json, FoodlistBean.RowsBean.class);
         tool = new Tool(context);
         saleQuantity2 = findViewById(R.id.saleQuantity2);
@@ -325,12 +326,12 @@ public class FoodorderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     Intent intent = new Intent(context, BillingpageActivity.class);
-                    if(numlist!=null &&  !TextUtils.isEmpty(substring) && !"0.0".equals(substring.trim())){
+                    if(numlist!=null &&  !TextUtils.isEmpty(substring)){
                         String numsjson = gson.toJson(numlist);
                         intent.putExtra(Common.numlist,numsjson);
                         intent.putExtra(Common.money,substring);
                         intent.putExtra(Common.shopname,rowsBean.getName());
-                        intent.putExtra(Common.Foodorderid,Foodorderid);
+                      //  intent.putExtra(Common.Foodorderid,Foodorderid);
                         context.startActivity(intent);
                     }else {
                         Toast.makeText(context,"请选择菜品",Toast.LENGTH_SHORT).show();

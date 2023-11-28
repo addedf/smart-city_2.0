@@ -13,5 +13,6 @@ public class Common {
     public static final String numlist = "numlist";
     public static final String money = "money";
     public static final String shopname = "shopname";
-    public static final String Foodorderid = "Foodorderid";
+    public static final String ordernumber = "ordernumber";
+    public static final String moneytotality = "moneytotality";
 }
