@@ -309,7 +309,7 @@ public class FoodorderActivity extends AppCompatActivity {
         gson = new Gson();
         Intent intent = getIntent();
         String json = intent.getStringExtra(Common.FoodorderActivity);
-     //   String Foodorderid = intent.getStringExtra(Common.Foodorderid);
+        //String Foodorderid = intent.getStringExtra(Common.Foodorderid);
         rowsBean = gson.fromJson(json, FoodlistBean.RowsBean.class);
         tool = new Tool(context);
         saleQuantity2 = findViewById(R.id.saleQuantity2);

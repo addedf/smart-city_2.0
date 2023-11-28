@@ -167,8 +167,9 @@ public class BillingpageActivity extends AppCompatActivity {
                             arrayList.add(orderItemListBean);
                         }
                         takeoutorderBean.setOrderItemList(arrayList);
-                        Log.e(TAG,takeoutorderBean.toString());
 
+
+                        //创建订单号
                         createorder(gson.toJson(takeoutorderBean));
 
                     }else {
@@ -193,7 +194,8 @@ public class BillingpageActivity extends AppCompatActivity {
                             Intent intent = new Intent(context,PaymentActivity.class);
                             intent.putExtra(Common.ordernumber,takeoutordernumberBean.getOrderNo());
                             intent.putExtra(Common.moneytotality,money);
-                            context.startActivity(intent);
+                            //context.startActivity(intent);
+                            context.startActivityForResult(intent,REQUEST_CODE_DELIVERY);
                         }else {
                             Toast.makeText(context,takeoutordernumberBean.getMsg(),Toast.LENGTH_SHORT).show();
                         }
@@ -258,6 +260,9 @@ public class BillingpageActivity extends AppCompatActivity {
         //点击收货地址的返回和保存地址成功都执行这个判断,结束掉弹窗的生命周期
         if(requestCode==REQUEST_CODE_DELIVERY && resultCode==RESULT_OK){
             alertDialog.dismiss();
-        }
+        }/*else if(requestCode==REQUEST_CODE_DELIVERY && resultCode==RESULT_CANCELED){
+            //支付完成后，回到点菜的界面
+            context.finish();
+        }*/
     }
 }

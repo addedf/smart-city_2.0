@@ -41,10 +41,10 @@ public class TakeOutActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.ll_body,hometake).commit();
                         break;
                     case R.id.ordertakeout:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body,mainFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body,ordert).commit();
                         break;
                     case R.id.mytakeout:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body,ordert).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body,mainFragment).commit();
                         break;
                 }
                 return true;

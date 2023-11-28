@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/def"
     tools:context=".service.takeout.Fragment.OrdertakeoutFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/purple_200"
+        android:layout_height="@dimen/toolbar">
+        <ImageView
+            android:id="@+id/ic_back"
+            android:src="@drawable/ic_back"
+            android:layout_width="@dimen/back"
+            android:layout_height="@dimen/back"
+            android:layout_margin="@dimen/margin">
+        </ImageView>
+        <TextView
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="订单页面"
+            android:textSize="@dimen/title"
+            android:padding="@dimen/margin"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+    </FrameLayout>
 
-</FrameLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:id="@+id/mytab"
+        android:layout_height="@dimen/toolbar">
+    </com.google.android.material.tabs.TabLayout>
+
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/orderAll"
+          android:background="@color/white"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+      </androidx.recyclerview.widget.RecyclerView>
+
+  </FrameLayout>
+</LinearLayout>

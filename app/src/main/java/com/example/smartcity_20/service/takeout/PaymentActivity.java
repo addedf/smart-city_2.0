@@ -46,6 +46,7 @@ public class PaymentActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String ordernumber = intent.getStringExtra(Common.ordernumber);
         String moneytotality = intent.getStringExtra(Common.moneytotality);
+        //setResult(RESULT_CANCELED,intent);
         Log.d(TAG,"ordernumber"+ordernumber);
 
 
