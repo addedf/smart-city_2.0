@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/net"
     android:background="@color/def"
     tools:context=".service.pethospital.PetHospitalActivity">
 
@@ -70,5 +71,6 @@
                android:layout_height="wrap_content">
            </androidx.recyclerview.widget.RecyclerView>
        </FrameLayout>
+
    </LinearLayout>
 </androidx.core.widget.NestedScrollView>

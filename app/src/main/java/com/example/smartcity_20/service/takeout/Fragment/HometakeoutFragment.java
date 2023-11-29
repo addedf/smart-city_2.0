@@ -1,6 +1,7 @@
 package com.example.smartcity_20.service.takeout.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,13 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.smartcity_20.R;
+import com.example.smartcity_20.config.java.OkHttpRequest;
 import com.example.smartcity_20.config.kotlin.Tool;
+import com.example.smartcity_20.me.LoginActivity;
 import com.example.smartcity_20.service.takeout.apter.FoodhottyApter;
 import com.example.smartcity_20.service.takeout.apter.FoodlistApter;
 import com.example.smartcity_20.service.takeout.apter.FoodtypeApter;
@@ -24,6 +28,7 @@ import com.example.smartcity_20.service.takeout.bean.FoodhottyBean;
 import com.example.smartcity_20.service.takeout.bean.FoodlistBean;
 import com.example.smartcity_20.service.takeout.bean.FoodtypeBean;
 import com.example.smartcity_20.service.takeout.bean.VptakeoutBean;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 

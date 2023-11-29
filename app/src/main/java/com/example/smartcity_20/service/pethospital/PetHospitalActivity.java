@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.OkHttpRequest;
 import com.example.smartcity_20.config.kotlin.Tool;
+import com.example.smartcity_20.me.LoginActivity;
 import com.example.smartcity_20.service.apter.PetTypeApter;
 import com.example.smartcity_20.service.apter.PetcaseApter;
 import com.example.smartcity_20.service.bean.PetTypeBean;
@@ -39,6 +42,17 @@ public class PetHospitalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_hospital);
         context = this;
+        if(TextUtils.isEmpty(OkHttpRequest.TOKEN)){
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.net), "请先登录", Snackbar.LENGTH_LONG);
+            snackbar.setAction("登录", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+            snackbar.show();
+        }
         initview();
         img_bloak();
         typelistmethod();
