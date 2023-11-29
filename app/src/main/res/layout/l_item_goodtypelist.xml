@@ -12,6 +12,7 @@
         android:background="@drawable/defaul_bg">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/imgUrl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

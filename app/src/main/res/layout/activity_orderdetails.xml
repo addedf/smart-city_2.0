@@ -33,12 +33,13 @@
     </FrameLayout>
 
     <LinearLayout
+        android:background="@drawable/defaul_bg"
         android:layout_margin="@dimen/margin"
         android:id="@+id/ll2"
         android:layout_below="@+id/ll1"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="300dp">
 
         <TextView
             android:id="@+id/name"
@@ -54,7 +55,7 @@
            <LinearLayout
                android:orientation="vertical"
                android:layout_width="match_parent"
-               android:layout_height="match_parent">
+               android:layout_height="wrap_content">
                <androidx.recyclerview.widget.RecyclerView
                    android:id="@+id/refoodlist"
                    android:background="@color/white"
@@ -62,26 +63,31 @@
                    android:layout_height="wrap_content">
                </androidx.recyclerview.widget.RecyclerView>
 
-               <TextView
-                   android:id="@+id/monrytotle"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="xxx"
-                   android:gravity="right"
-                   android:textColor="@color/black"
-                   android:textSize="14dp">
-               </TextView>
+
            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
 
+    </LinearLayout>
+    <TextView
+        android:layout_below="@+id/ll2"
+        android:padding="@dimen/five"
+        android:layout_marginHorizontal="@dimen/margin"
+        android:background="@color/white"
+        android:id="@+id/monrytotle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="xxx"
+        android:gravity="right"
+        android:textColor="@color/black"
+        android:textSize="14dp">
+    </TextView>
     <LinearLayout
         android:layout_marginHorizontal="@dimen/margin"
         android:padding="@dimen/margin"
         android:background="@drawable/defaul_bg"
         android:id="@+id/ll3"
         android:paddingHorizontal="8dp"
-        android:layout_below="@+id/ll2"
+        android:layout_below="@+id/monrytotle"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content"
