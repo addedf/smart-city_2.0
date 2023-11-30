@@ -64,7 +64,6 @@ public class DoctorActivity extends AppCompatActivity {
     private void initview() {
         Intent intent = getIntent();
         id = intent.getStringExtra(Common.DoctorID);
-        Log.e(TAG,"id="+id);
         ic_back = findViewById(R.id.ic_back);
         doctorlist = findViewById(R.id.doctorlist);
     }

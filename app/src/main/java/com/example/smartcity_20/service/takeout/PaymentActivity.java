@@ -47,16 +47,13 @@ public class PaymentActivity extends AppCompatActivity {
         String ordernumber = intent.getStringExtra(Common.ordernumber);
         String moneytotality = intent.getStringExtra(Common.moneytotality);
         //setResult(RESULT_CANCELED,intent);
-        Log.d(TAG,"ordernumber"+ordernumber);
-
-
         money.setText(moneytotality);
 
 
         ic_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.finish();
+                sendbroadcast();
             }
         });
 
@@ -65,11 +62,11 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int checkedRadioButtonId = group.getCheckedRadioButtonId();
-                if(checkedRadioButtonId==R.id.ra1){
+                if (checkedRadioButtonId == R.id.ra1) {
                     paymenttype = "电子钱包";
-                }else  if(checkedRadioButtonId==R.id.ra2){
+                } else if (checkedRadioButtonId == R.id.ra2) {
                     paymenttype = "微信";
-                }else if(checkedRadioButtonId==R.id.ra3){
+                } else if (checkedRadioButtonId == R.id.ra3) {
                     paymenttype = "支付宝";
                 }
             }
@@ -79,12 +76,12 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    if(!TextUtils.isEmpty(paymenttype.trim()) && !TextUtils.isEmpty(ordernumber) && !TextUtils.isEmpty(moneytotality)){
+                    if (!TextUtils.isEmpty(paymenttype.trim()) && !TextUtils.isEmpty(ordernumber) && !TextUtils.isEmpty(moneytotality)) {
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("orderNo",ordernumber);
-                        jsonObject.put("paymentType",paymenttype);
+                        jsonObject.put("orderNo", ordernumber);
+                        jsonObject.put("paymentType", paymenttype);
                         sendpost(jsonObject.toString());
-                    }else{
+                    } else {
                         Toast.makeText(context, "请选择支付类型", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
@@ -94,6 +91,12 @@ public class PaymentActivity extends AppCompatActivity {
         });
     }
 
+    private void sendbroadcast() {
+        Intent intent = new Intent("TakeOutActivity");
+        context.sendBroadcast(intent);
+        context.finish();
+    }
+
     private void sendpost(String JSON) {
         new Tool(context).send("/prod-api/api/takeout/pay",
                 "POST",
@@ -101,10 +104,11 @@ public class PaymentActivity extends AppCompatActivity {
                 StatusBean.class, new Function1<StatusBean, Unit>() {
                     @Override
                     public Unit invoke(StatusBean statusBean) {
-                        if(statusBean.getCode()==200){
+                        if (statusBean.getCode() == 200) {
                             Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
+                            sendbroadcast();
                             context.finish();
-                        }else {
+                        } else {
                             Toast.makeText(context, statusBean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
                         return null;

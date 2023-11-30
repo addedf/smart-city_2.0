@@ -43,6 +43,10 @@ public class OrderAllApter extends RecyclerView.Adapter<OrderAllApter.Myhot> {
         this.good = good;
     }
 
+    public void setData(List<GoodsnumberBean.RowsDTO> rows) {
+        this.list =  rows;
+    }
+
     public interface Goodsport {
         //显示菜品的列表
         public void goodlist(RecyclerView foodlist, GoodsnumberBean.RowsDTO.OrderInfoDTO orderInfo);

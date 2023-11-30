@@ -48,6 +48,7 @@ public class OrdertakeoutFragment extends Fragment {
     private String TAG = "TAG";
     private JSONObject jsonObject;
     private GoodsnumberBean goodsnumber;
+    private OrderAllApter orderAllApter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,14 +58,14 @@ public class OrdertakeoutFragment extends Fragment {
         context = getContext();
         initview();
         orderlisttype();
-
+        orderlist("全部");
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getindexoodertype();
+        //刷新点击支付后的状态
     }
 
     public void getindexoodertype(){
@@ -86,7 +87,7 @@ public class OrdertakeoutFragment extends Fragment {
             mytab.addTab(tab);
         }
 
-        orderlist("全部");
+
 
         mytab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -104,6 +105,7 @@ public class OrdertakeoutFragment extends Fragment {
 
             }
         });
+
     }
 
     private void orderlist(String type) {
@@ -123,92 +125,8 @@ public class OrdertakeoutFragment extends Fragment {
                     public Unit invoke(GoodsnumberBean goodsnumberBean) {
                         if (goodsnumberBean.getCode() == 200) {
                             goodsnumber = goodsnumberBean;
-                            orderAll.setLayoutManager(new LinearLayoutManager(context));
-                            OrderAllApter orderAllApter = new OrderAllApter(context, goodsnumberBean.getRows(), new OrderAllApter.Goodsport() {
-
-                                //显示点菜的列表
-                                @Override
-                                public void goodlist(RecyclerView foodlist, GoodsnumberBean.RowsDTO.OrderInfoDTO orderInfo) {
-                                    foodlist.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
-                                    foodlist.setAdapter(new goodlistApter(context, orderInfo.getOrderItemList()));
-                                }
-
-                                //出现评价的弹窗
-                                @Override
-                                public void rateClick(String order) {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                    View inflate = LayoutInflater.from(context).inflate(R.layout.l_dialog_rate, null);
-                                    EditText ed_rete = inflate.findViewById(R.id.ed_rete);
-                                    RatingBar bar = inflate.findViewById(R.id.bar);
-                                    builder.setView(inflate);
-                                    builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-
-                                        }
-                                    });
-
-                                    builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            try {
-                                                String str_rete = ed_rete.getText().toString();
-                                                int numStars = Math.round(bar.getRating());
-                                                Log.e(TAG, "numStars" + numStars);
-                                                if (!TextUtils.isEmpty(str_rete.trim()) && !TextUtils.isEmpty(order) && numStars != 0) {
-                                                    jsonObject.put("content", str_rete);
-                                                    jsonObject.put("orderNo", order);
-                                                    jsonObject.put("score", numStars);
-                                                    sendretepost(jsonObject.toString(), order);
-                                                } else {
-                                                    Toast.makeText(activity, "内容不能为空", Toast.LENGTH_SHORT).show();
-                                                }
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    });
-
-                                    builder.create().show();
-                                }
-
-                                //出现退款弹窗
-                                @Override
-                                public void refundClick(String order) {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                    View inflate = LayoutInflater.from(context).inflate(R.layout.l_dialog_refund, null);
-                                    EditText ed_refund = inflate.findViewById(R.id.ed_refund);
-                                    builder.setView(inflate);
-                                    builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-
-                                        }
-                                    });
-
-                                    builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            try {
-                                                String str_refund = ed_refund.getText().toString();
-
-                                                if (!TextUtils.isEmpty(str_refund.trim()) && !TextUtils.isEmpty(order)) {
-                                                    jsonObject.put("reason", str_refund);
-                                                    jsonObject.put("orderNo", order);
-                                                    sendrefundpost(jsonObject.toString(), order);
-                                                } else {
-                                                    Toast.makeText(activity, "内容不能为空", Toast.LENGTH_SHORT).show();
-                                                }
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    });
-
-                                    builder.create().show();
-                                }
-                            });
-                            orderAll.setAdapter(orderAllApter);
+                            orderAllApter.setData(goodsnumber.getRows());
+                            orderAllApter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(context, goodsnumberBean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
@@ -228,15 +146,25 @@ public class OrdertakeoutFragment extends Fragment {
                     public Unit invoke(StatusBean statusBean) {
                         if (statusBean.getCode() == 200) {
                             //将回调的订单号和全部的订单号比较,并修改状态
-                            for (GoodsnumberBean.RowsDTO row : goodsnumber.getRows()) {
+                            /*for (GoodsnumberBean.RowsDTO row : goodsnumber.getRows()) {
                                 String row_order = row.getOrderInfo().getOrderNo();
                                 if (order.equals(row_order)) {
                                     row.getOrderInfo().setStatus("已退款");
                                 }
+                            }*/
+                            for (int i = 0; i < goodsnumber.getRows().size(); i++) {
+                                GoodsnumberBean.RowsDTO rowsDTO = goodsnumber.getRows().get(i);
+                                String orderNo = rowsDTO.getOrderInfo().getOrderNo();
+                                if(order.equals(orderNo)){
+                                    goodsnumber.getRows().remove(i);
+                                    break;
+                                }
                             }
+                            orderAllApter.setData(goodsnumber.getRows());
+                            orderAllApter.notifyDataSetChanged();
                             Toast.makeText(activity, "退款成功", Toast.LENGTH_SHORT).show();
                             //刷新订单的状态
-                            getindexoodertype();
+                           // getindexoodertype();
                         } else {
                             Toast.makeText(activity, statusBean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
@@ -256,15 +184,26 @@ public class OrdertakeoutFragment extends Fragment {
                     public Unit invoke(StatusBean statusBean) {
                         if (statusBean.getCode() == 200) {
                             //将回调的订单号和全部的订单号比较,并修改状态
-                            for (GoodsnumberBean.RowsDTO row : goodsnumber.getRows()) {
+//                            for (GoodsnumberBean.RowsDTO row : goodsnumber.getRows()) {
+//                                String row_order = row.getOrderInfo().getOrderNo();
+//                                if (order.equals(row_order)) {
+//                                    row.getOrderInfo().setStatus("已完成");
+//                                }
+//                            }
+//                            orderAllApter.notifyDataSetChanged();
+                            //刷新订单的状态
+                            //getindexoodertype();
+                            for (int index=0;index<goodsnumber.getRows().size();index++) {
+                                GoodsnumberBean.RowsDTO row = goodsnumber.getRows().get(index);
                                 String row_order = row.getOrderInfo().getOrderNo();
                                 if (order.equals(row_order)) {
-                                    row.getOrderInfo().setStatus("已完成");
+                                    goodsnumber.getRows().remove(index);
+                                    break;
                                 }
                             }
+                            orderAllApter.setData(goodsnumber.getRows());
+                            orderAllApter.notifyDataSetChanged();
                             Toast.makeText(activity, "发表成功", Toast.LENGTH_SHORT).show();
-                            //刷新订单的状态
-                            getindexoodertype();
                         } else {
                             Toast.makeText(activity, statusBean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
@@ -288,6 +227,92 @@ public class OrdertakeoutFragment extends Fragment {
                 activity.finish();
             }
         });
+
+        orderAll.setLayoutManager(new LinearLayoutManager(context));
+        orderAllApter = new OrderAllApter(context, new ArrayList< GoodsnumberBean.RowsDTO >(), new OrderAllApter.Goodsport() {
+
+            //显示点菜的列表
+            @Override
+            public void goodlist(RecyclerView foodlist, GoodsnumberBean.RowsDTO.OrderInfoDTO orderInfo) {
+                foodlist.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
+                foodlist.setAdapter(new goodlistApter(context, orderInfo.getOrderItemList()));
+            }
+
+            //出现评价的弹窗
+            @Override
+            public void rateClick(String order) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                View inflate = LayoutInflater.from(context).inflate(R.layout.l_dialog_rate, null);
+                EditText ed_rete = inflate.findViewById(R.id.ed_rete);
+                RatingBar bar = inflate.findViewById(R.id.bar);
+                builder.setView(inflate);
+                builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            String str_rete = ed_rete.getText().toString();
+                            int numStars = Math.round(bar.getRating());
+                            if (!TextUtils.isEmpty(str_rete.trim()) && !TextUtils.isEmpty(order) && numStars != 0) {
+                                jsonObject.put("content", str_rete);
+                                jsonObject.put("orderNo", order);
+                                jsonObject.put("score", numStars);
+                                sendretepost(jsonObject.toString(), order);
+                            } else {
+                                Toast.makeText(activity, "内容不能为空", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                builder.create().show();
+            }
+
+            //出现退款弹窗
+            @Override
+            public void refundClick(String order) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                View inflate = LayoutInflater.from(context).inflate(R.layout.l_dialog_refund, null);
+                EditText ed_refund = inflate.findViewById(R.id.ed_refund);
+                builder.setView(inflate);
+                builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            String str_refund = ed_refund.getText().toString();
+
+                            if (!TextUtils.isEmpty(str_refund.trim()) && !TextUtils.isEmpty(order)) {
+                                jsonObject.put("reason", str_refund);
+                                jsonObject.put("orderNo", order);
+                                sendrefundpost(jsonObject.toString(), order);
+                            } else {
+                                Toast.makeText(activity, "内容不能为空", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                builder.create().show();
+            }
+        });
+        orderAll.setAdapter(orderAllApter);
 
     }
 }

@@ -3,9 +3,13 @@ package com.example.smartcity_20.service.takeout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -24,6 +28,9 @@ public class TakeOutActivity extends AppCompatActivity {
 
 
     private TakeOutActivity context;
+    private BottomNavigationView bot;
+    private Mybroadcast mybroadcast;
+    private String  TAG = "TAG" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +58,24 @@ public class TakeOutActivity extends AppCompatActivity {
         initView();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mybroadcast);
+    }
+
     private void initView() {
-        LinearLayout ll_body = findViewById(R.id.ll_body);
-        BottomNavigationView bot = findViewById(R.id.bot);
+        bot = findViewById(R.id.bot);
+
 
         HometakeoutFragment hometake = new HometakeoutFragment();
         MytakeoutFragment mainFragment = new MytakeoutFragment();
         OrdertakeoutFragment ordert = new OrdertakeoutFragment();
+
+        mybroadcast = new Mybroadcast();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("TakeOutActivity");
+        registerReceiver(mybroadcast,intentFilter);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.ll_body,hometake).commit();
         bot.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -77,5 +95,17 @@ public class TakeOutActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    class Mybroadcast extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if("TakeOutActivity".equals(action)){
+                Log.d(TAG,"action"+action);
+               // bot.setSelectedItemId(R.id.ordertakeout);
+            }
+        }
     }
 }

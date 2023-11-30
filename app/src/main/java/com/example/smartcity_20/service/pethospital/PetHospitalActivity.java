@@ -1,16 +1,15 @@
 package com.example.smartcity_20.service.pethospital;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.OkHttpRequest;
@@ -209,8 +208,5 @@ public class PetHospitalActivity extends AppCompatActivity {
         typelist = findViewById(R.id.typelist);
         mytab = findViewById(R.id.mytab);
         caselist = findViewById(R.id.caselist);
-
-        /*View inflate = LayoutInflater.from(context).inflate(R.layout.activity_pet_hospital, null);
-        Snackbar.make(inflate,"未登录",Snackbar.LENGTH_SHORT).show();*/
     }
 }
