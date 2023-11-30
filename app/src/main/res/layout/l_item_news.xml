@@ -43,8 +43,8 @@
         android:layout_height="wrap_content">
     </TextView>
 
-    <TextView        android:textColor="@color/h2color"
-
+    <TextView
+         android:textColor="@color/h2color"
         android:layout_below="@+id/content"
         android:textSize="@dimen/h3"
         android:layout_alignParentBottom="true"

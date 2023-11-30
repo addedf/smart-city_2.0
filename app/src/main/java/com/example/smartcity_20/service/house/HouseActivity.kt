@@ -1,4 +1,4 @@
-package com.example.smartcity_20.service.house
+    package com.example.smartcity_20.service.house
 
 import android.content.Intent
 import android.graphics.drawable.ClipDrawable.HORIZONTAL

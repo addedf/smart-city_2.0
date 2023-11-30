@@ -21,4 +21,36 @@
             android:textColor="@color/white"
             android:textSize="@dimen/title"/>
     </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar"
+                android:id="@+id/hospital_search"
+                android:layout_marginHorizontal="@dimen/layout_marginVertical"
+                android:background="@drawable/defaul_bg"
+                android:layout_marginTop="@dimen/margin"/>
+            <androidx.viewpager2.widget.ViewPager2
+                android:layout_marginTop="@dimen/margin"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/hospital_banner"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin"
+                    android:id="@+id/hospital_list"
+                    android:layout_marginHorizontal="@dimen/margin"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
