@@ -64,6 +64,19 @@ public class HometakeoutFragment extends Fragment {
         return view;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+        vpmapmethod();
+        foodtypemethod();
+        foodhottymethod();
+        foodlistmethod();
+
+    }
+
     private void foodlistmethod() {
         tool.send("/prod-api/api/takeout/seller/list",
                 "GET",

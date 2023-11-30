@@ -1,18 +1,18 @@
 package com.example.smartcity_20.service.takeout;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.OkHttpRequest;
@@ -22,41 +22,41 @@ import com.example.smartcity_20.service.takeout.Fragment.HometakeoutFragment;
 import com.example.smartcity_20.service.takeout.Fragment.MytakeoutFragment;
 import com.example.smartcity_20.service.takeout.Fragment.OrdertakeoutFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 public class TakeOutActivity extends AppCompatActivity {
-
 
     private TakeOutActivity context;
     private BottomNavigationView bot;
     private Mybroadcast mybroadcast;
-    private String  TAG = "TAG" ;
+    private String TAG = "TAG";
+
+    HometakeoutFragment hometake;
+    MytakeoutFragment mainFragment;
+    OrdertakeoutFragment ordert;
+    private Tool tool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_out);
         context = this;
-        if(TextUtils.isEmpty(OkHttpRequest.TOKEN)){
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.layou), "请先登录", Snackbar.LENGTH_LONG);
-            snackbar.setAction("登录", new View.OnClickListener() {
+        tool = new Tool(context);
+        if (TextUtils.isEmpty(OkHttpRequest.TOKEN)) {
+            tool.snackBar(findViewById(R.id.layou), "请先登录", "去登录", new Function0<Unit>() {
                 @Override
-                public void onClick(View v) {
+                public Unit invoke() {
                     Intent intent = new Intent(context, LoginActivity.class);
                     context.startActivity(intent);
+                    return null;
                 }
             });
-            snackbar.show();
         }
         initView();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //未登录的时候,点击登录刷新登录界面
-        initView();
-    }
 
     @Override
     protected void onDestroy() {
@@ -68,28 +68,29 @@ public class TakeOutActivity extends AppCompatActivity {
         bot = findViewById(R.id.bot);
 
 
-        HometakeoutFragment hometake = new HometakeoutFragment();
-        MytakeoutFragment mainFragment = new MytakeoutFragment();
-        OrdertakeoutFragment ordert = new OrdertakeoutFragment();
+        hometake = new HometakeoutFragment();
+        mainFragment = new MytakeoutFragment();
+        ordert = new OrdertakeoutFragment();
 
         mybroadcast = new Mybroadcast();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("TakeOutActivity");
-        registerReceiver(mybroadcast,intentFilter);
+        registerReceiver(mybroadcast, intentFilter);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body,hometake).commit();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body, hometake).commit();
         bot.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.hometakeout:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body,hometake).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body, hometake).commit();
                         break;
                     case R.id.ordertakeout:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body,ordert).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body, ordert).commit();
                         break;
                     case R.id.mytakeout:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body,mainFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.ll_body, mainFragment).commit();
                         break;
                 }
                 return true;
@@ -102,10 +103,20 @@ public class TakeOutActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if("TakeOutActivity".equals(action)){
-                Log.d(TAG,"action"+action);
-               // bot.setSelectedItemId(R.id.ordertakeout);
+            if ("TakeOutActivity".equals(action)) {
+                Log.d(TAG, "action" + action);
+                //bot.setSelectedItemId(R.id.ordertakeout);
+                //getSupportFragmentManager().beginTransaction().replace(R.id.ll_body,ordert).commit();
+                //handler.sendEmptyMessageDelayed(0,1000);
             }
         }
     }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            bot.setSelectedItemId(R.id.ordertakeout);
+        }
+    };
 }
