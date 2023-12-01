@@ -1,14 +1,17 @@
 package com.example.smartcity_20.service.hospital
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.RadioButton
 import android.widget.Toast
 import com.example.smartcity_20.R
+import com.example.smartcity_20.config.kotlin.jump
 import com.example.smartcity_20.config.kotlin.tool
 import com.example.smartcity_20.config.kotlin.viewBinding
 import com.example.smartcity_20.databinding.ActivityRegInfoBinding
+import com.example.smartcity_20.me.LoginActivity
 import org.json.JSONObject
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -19,6 +22,9 @@ class RegInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(vb.root)
+        vb.regInfoAdd.setOnClickListener {
+            jump(SectionActivity::class.java)
+        }
         val id = intent.getIntExtra("id",0)
         val name = intent.getStringExtra("name")
         val cardId = intent.getStringExtra("cardId")

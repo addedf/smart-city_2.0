@@ -20,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartCity_20"
         android:usesCleartextTraffic="true">
-        <activity android:name=".service.hospital.RegInfoActivity"></activity>
+        <activity android:name=".service.hospital.SectionInfoActivity"></activity>
+        <activity android:name=".service.hospital.SectionActivity" />
+        <activity android:name=".service.hospital.RegInfoActivity" />
         <activity android:name=".service.hospital.RegisteredActivity" />
         <activity android:name=".service.hospital.HospitalnfoActivity" />
         <activity android:name=".service.takeout.OrderdetailsActivity"></activity>
