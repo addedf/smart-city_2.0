@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:padding="@dimen/eight"
+    android:layout_margin="@dimen/margin"
+    android:background="@drawable/defaul_bg">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/h1"
+        android:textColor="@color/h1color"
+        android:id="@+id/m_item_section_info_list_patientName"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/m_item_section_info_list_patientName"
+        android:textSize="@dimen/h2"
+        android:textColor="@color/h2color"
+        android:id="@+id/m_item_section_info_list_type"
+        android:layout_marginTop="@dimen/eight"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/m_item_section_info_list_type"
+        android:textSize="@dimen/h2"
+        android:textColor="@color/h2color"
+        android:id="@+id/m_item_section_info_list_reserveTime"
+        android:layout_marginTop="@dimen/eight"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/h2color"
+        android:layout_marginTop="@dimen/eight"
+        android:layout_below="@+id/m_item_section_info_list_reserveTime"/>
+</RelativeLayout>
