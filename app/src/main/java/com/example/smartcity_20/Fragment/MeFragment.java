@@ -53,22 +53,6 @@ public class MeFragment extends Fragment {
         return view;
     }
 
-    private void intentorder() {
-
-    }
-
-    private void feedback() {
-
-    }
-
-    private void editpwd() {
-
-    }
-
-    private void Personalinformation() {
-
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -137,6 +121,12 @@ public class MeFragment extends Fragment {
                     login.setText("登录");
                     querypersonal();
                 }
+
+            }
+        });
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });

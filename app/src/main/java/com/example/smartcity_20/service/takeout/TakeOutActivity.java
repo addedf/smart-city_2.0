@@ -10,6 +10,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,14 +46,24 @@ public class TakeOutActivity extends AppCompatActivity {
         context = this;
         tool = new Tool(context);
         if (TextUtils.isEmpty(OkHttpRequest.TOKEN)) {
-            tool.snackBar(findViewById(R.id.layou), "请先登录", "去登录", new Function0<Unit>() {
+           /* tool.snackBar(findViewById(R.id.layou), "请先登录", "去登录", new Function0<Unit>() {
                 @Override
                 public Unit invoke() {
                     Intent intent = new Intent(context, LoginActivity.class);
                     context.startActivity(intent);
                     return null;
                 }
+            });*/
+            Log.d(TAG,"登录");
+            OkHttpRequest.dologin(findViewById(R.id.layou), "请先登录", "登录", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG,"登录");
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent);
+                }
             });
+
         }
         initView();
     }

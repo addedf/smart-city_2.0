@@ -224,7 +224,8 @@ public class HomeFragment extends Fragment {
                                     for (VpmapBean.RowsDTO row : vopmapBean.getRows()) {
                                         arrayList.add(row.getAdvImg());
                                     }
-                                    vp.setAdapter(new VpmapApter(context,arrayList));
+                                    //vp.setAdapter(new VpmapApter(context,arrayList));
+                                    OkHttpRequest.doMapRequst(vp,arrayList,context);
                                 }
                             }
                         });
