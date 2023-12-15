@@ -35,7 +35,7 @@
                 android:layout_marginHorizontal="@dimen/layout_marginVertical"
                 android:background="@drawable/defaul_bg"
                 android:layout_marginTop="@dimen/margin"/>
-            <androidx.viewpager2.widget.ViewPager2
+            <androidx.viewpager.widget.ViewPager
                 android:layout_marginTop="@dimen/margin"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"

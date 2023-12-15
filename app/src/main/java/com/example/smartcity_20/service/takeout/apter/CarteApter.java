@@ -26,9 +26,9 @@ import java.util.List;
 public class CarteApter extends RecyclerView.Adapter<CarteApter.Myhot>{
 
     private Context context;
-    private List<FoodBean.DataDTO> list;
+    private List<FoodBean.DataBean> list;
 
-    public CarteApter(Context context, List<FoodBean.DataDTO> list) {
+    public CarteApter(Context context, List<FoodBean.DataBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -60,7 +60,7 @@ public class CarteApter extends RecyclerView.Adapter<CarteApter.Myhot>{
                 holder.price.setText(String.valueOf(list.get(position).getPrice()));
             }
 
-            if(list.get(position).getNums() !=null){
+            if(list.get(position).getNums() !=0){
                 holder.nums.setText(String.valueOf("x "+list.get(position).getNums()));
             }
 

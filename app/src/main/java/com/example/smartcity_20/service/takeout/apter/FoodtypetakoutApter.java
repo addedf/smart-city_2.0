@@ -20,12 +20,21 @@ public class FoodtypetakoutApter extends RecyclerView.Adapter<FoodtypetakoutApte
 
     private Context context;
     private List<FoodtypetakoutBean.DataDTO> list;
+    private TakeoutcategoryId  takeoutcategoryId;
 
-    public FoodtypetakoutApter(Context context, List<FoodtypetakoutBean.DataDTO> list) {
+
+    public FoodtypetakoutApter(Context context, TakeoutcategoryId takeoutcategoryId) {
         this.context = context;
+        this.takeoutcategoryId = takeoutcategoryId;
+    }
+
+    public void setData(List<FoodtypetakoutBean.DataDTO> list){
         this.list = list;
     }
 
+    public interface TakeoutcategoryId  {
+        void playcategoryId(Integer categoryId,int position);
+    }
     @NonNull
     @Override
     public FoodtypetakoutApter.Myhot onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,6 +51,13 @@ public class FoodtypetakoutApter extends RecyclerView.Adapter<FoodtypetakoutApte
             if(!TextUtils.isEmpty(list.get(position).getName())){
                 holder.name.setText(list.get(position).getName());
             }
+
+            holder.name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    takeoutcategoryId.playcategoryId(list.get(position).getId(),position);
+                }
+            });
 
         } catch (Exception e) {
             e.printStackTrace();

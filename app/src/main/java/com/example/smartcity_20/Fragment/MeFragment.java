@@ -124,12 +124,6 @@ public class MeFragment extends Fragment {
 
             }
         });
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         penosn.setOnClickListener(new View.OnClickListener() {
             @Override

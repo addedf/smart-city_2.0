@@ -162,6 +162,7 @@ public class OkHttpRequest {
                 imageView = new ImageView(content);
                 String img = list.get(position);
                 Glide.with(content).load(IpandPort.URL + img).into(imageView);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 container.addView(imageView);
             } catch (Exception e) {
                 Log.e(TAG, "轮播图解析错误" + e.getMessage());

@@ -142,6 +142,24 @@ public class FoodtypetakoutBean {
             this.sort = sort;
         }
 
+        @Override
+        public String toString() {
+            return "DataDTO{" +
+                    "searchValue=" + searchValue +
+                    ", createBy=" + createBy +
+                    ", createTime='" + createTime + '\'' +
+                    ", updateBy=" + updateBy +
+                    ", updateTime='" + updateTime + '\'' +
+                    ", remark=" + remark +
+                    ", params=" + params +
+                    ", id=" + id +
+                    ", name='" + name + '\'' +
+                    ", sellerId=" + sellerId +
+                    ", themeId=" + themeId +
+                    ", sort=" + sort +
+                    '}';
+        }
+
         public static class ParamsDTO {
         }
     }

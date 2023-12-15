@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.smartcity_20.R
+import com.example.smartcity_20.config.java.OkHttpRequest
 import com.example.smartcity_20.config.kotlin.*
 import com.example.smartcity_20.databinding.ActivityHospitalBinding
 import com.example.smartcity_20.databinding.LItemNewsBinding
@@ -68,8 +69,10 @@ class HospitalActivity : AppCompatActivity() {
                 for (i in it.data.indices) {
                     list.add(it.data[i].imgUrl)
                 }
-                setBanner(vb.hospitalBanner,list)
+               /// setBanner(vb.hospitalBanner,list)
+                OkHttpRequest.doMapRequst(vb.hospitalBanner,list,context)
             }
         }
+
     }
 }

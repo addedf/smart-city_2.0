@@ -1,9 +1,5 @@
 package com.example.smartcity_20.service.takeout;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,6 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.smartcity_20.R;
@@ -64,9 +64,14 @@ public class FoodorderActivity extends AppCompatActivity {
     private LinearLayout ll_foodbody;
     private TextView money;
     private TextView account;
-    private String  TAG ="TAG";
-    private List<FoodBean.DataDTO> numlist;
+    private String  TAG ="FoodorderActivity";
+    private List<FoodBean.DataBean> numlist;
     private String substring;
+    private Integer id;
+    private FoodlisttakeoutApter foodlisttakeoutApter;
+    private FoodtypetakoutApter foodtypetakoutApter;
+    List<List<FoodBean.DataBean>> datas ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +95,6 @@ public class FoodorderActivity extends AppCompatActivity {
             mytab.addTab(tab);
         }
 
-        //点菜
-        Orderdishes();
         //菜品分类
         foodtypemothod();
 
@@ -100,8 +103,6 @@ public class FoodorderActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 String name = tab.getText().toString();
                 if(typelist.get(0).equals(name)){
-                    //点菜
-                    Orderdishes();
                     //菜品分类
                     foodtypemothod();
                 }else  if(typelist.get(1).equals(name)){
@@ -127,13 +128,12 @@ public class FoodorderActivity extends AppCompatActivity {
     }
 
 
-    public void displayprice(String moneyapter,List<FoodBean.DataDTO> list){
-        //substring = moneyapter.substring(0, moneyapter.indexOf(".")+2);
-        substring = moneyapter;
-        Iterator<FoodBean.DataDTO> iterator = list.iterator();
+    public void displayprice(String moneyapter,List<FoodBean.DataBean> list){
+        substring = moneyapter.substring(0, moneyapter.indexOf(".")+2);
+        Iterator<FoodBean.DataBean> iterator = list.iterator();
         numlist = new ArrayList();
         while (iterator.hasNext()) {
-            FoodBean.DataDTO next = iterator.next();
+            FoodBean.DataBean next = iterator.next();
             if(next.getNums()!=0){
                 numlist.add(next);
             }
@@ -144,7 +144,7 @@ public class FoodorderActivity extends AppCompatActivity {
         re.setVisibility(View.GONE);
         ll_foodbody.setVisibility(View.VISIBLE);
         reviewlist.setVisibility(View.GONE);
-        Integer id = rowsBean.getId();
+
         if(id ==null){
             return;
         }
@@ -158,7 +158,15 @@ public class FoodorderActivity extends AppCompatActivity {
                     public Unit invoke(FoodtypetakoutBean foodtypetakoutBean) {
                         if(foodtypetakoutBean.getCode()==200){
                             foodtypelist.setLayoutManager(new LinearLayoutManager(context));
-                            foodtypelist.setAdapter(new FoodtypetakoutApter(context,foodtypetakoutBean.getData()));
+                            foodtypetakoutApter.setData(foodtypetakoutBean.getData());
+
+                            foodtypelist.setAdapter(foodtypetakoutApter);
+                            datas = new ArrayList<>(foodtypetakoutBean.getData().size());
+                            for(int index=0;index<foodtypetakoutBean.getData().size();index++){
+                                datas.add(new ArrayList<FoodBean.DataBean>());
+                            }
+                            //点菜
+                            Orderdishes(foodtypetakoutBean.getData().get(0).getId(),0);
                         }
                         return null;
                     }
@@ -194,13 +202,9 @@ public class FoodorderActivity extends AppCompatActivity {
 
 
 
-    private void Orderdishes() {
-        re.setVisibility(View.VISIBLE);
-        ll_foodbody.setVisibility(View.GONE);
-        reviewlist.setVisibility(View.GONE);
-
-        //由于api接口文档获取id有问题,这里先写定参数
-        tool.send("/prod-api/api/takeout/product/list?categoryId=5&sellerId=4",
+    private void Orderdishes(Integer categoryId,int  index) {
+        //判断使用包含
+        tool.send("/prod-api/api/takeout/product/list?categoryId="+categoryId+"&sellerId="+id,
                 "GET",
                 null,
                 true,
@@ -210,12 +214,18 @@ public class FoodorderActivity extends AppCompatActivity {
                     public Unit invoke(FoodBean foodBean) {
                         if(foodBean.getCode()==200){
                             foodlist.setLayoutManager(new LinearLayoutManager(context));
-                            foodlist.setAdapter(new FoodlisttakeoutApter(context, foodBean.getData()));
+                            foodlist.setAdapter(foodlisttakeoutApter);
+                            //请求到的数据
+                            List<FoodBean.DataBean> data = foodBean.getData();
+                            datas.set(index,data);
+                            foodlisttakeoutApter.setData(datas.get(index));
                         }
                         return null;
                     }
                 });
     }
+
+
 
     private void shopmethod() {
         try {
@@ -288,6 +298,19 @@ public class FoodorderActivity extends AppCompatActivity {
     }
 
     private void initview() {
+        foodlisttakeoutApter = new FoodlisttakeoutApter(context);
+        foodtypetakoutApter = new FoodtypetakoutApter(context, new FoodtypetakoutApter.TakeoutcategoryId() {
+                    @Override
+                    public void playcategoryId(Integer categoryId, int position) {
+                        //判断是否有数据
+                        if(datas.get(position)==null || datas.get(position).size()==0){
+                            Orderdishes(categoryId,position);
+                        }else{
+                            foodlisttakeoutApter.setData(datas.get(position));
+                        }
+                    }
+                });
+
         ic_back = findViewById(R.id.ic_back);
         title = findViewById(R.id.title);
         imgUrl = findViewById(R.id.imgUrl);
@@ -320,7 +343,7 @@ public class FoodorderActivity extends AppCompatActivity {
         money = findViewById(R.id.money);
         account = findViewById(R.id.account);
 
-
+        id = rowsBean.getId();
         ll_foodbody.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -348,7 +371,9 @@ public class FoodorderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 context.finish();
+
             }
         });
     }
+
 }

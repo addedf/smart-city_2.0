@@ -1,5 +1,4 @@
 package com.example.smartcity_20.service.takeout.apter;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -19,18 +18,24 @@ import com.example.smartcity_20.R;
 import com.example.smartcity_20.config.java.IpandPort;
 import com.example.smartcity_20.service.takeout.FoodorderActivity;
 import com.example.smartcity_20.service.takeout.bean.FoodBean;
-import com.example.smartcity_20.service.takeout.bean.FoodtypetakoutBean;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class FoodlisttakeoutApter extends RecyclerView.Adapter<FoodlisttakeoutApter.Myhot>{
 
     private Context context;
-    private List<FoodBean.DataDTO> list;
-
-    public FoodlisttakeoutApter(Context context, List<FoodBean.DataDTO> list) {
+    private List<FoodBean.DataBean> list;
+    private List<FoodBean.DataBean> accountlist;
+    public FoodlisttakeoutApter(Context context) {
         this.context = context;
+        this.accountlist=new ArrayList<>();
+    }
+
+    public void setData(List<FoodBean.DataBean> list){
         this.list = list;
+        this.notifyDataSetChanged();
     }
 
     @NonNull
@@ -40,23 +45,33 @@ public class FoodlisttakeoutApter extends RecyclerView.Adapter<FoodlisttakeoutAp
         return new FoodlisttakeoutApter.Myhot(inflate);
     }
 
+
+
+
     public void account(){
-        double money =  0.0;
         try {
-            for (FoodBean.DataDTO dataDTO : list) {
+            double money =  0.0;
+            for (FoodBean.DataBean dataBean : list) {
+                if(dataBean.getNums()>0){
+                    accountlist.add(dataBean);
+                }
+            }
+
+            for (FoodBean.DataBean dataDTO : accountlist) {
                 money=money+dataDTO.getNums()*dataDTO.getPrice();
             }
+
             if(context instanceof FoodorderActivity){
                 FoodorderActivity foodorder =  (FoodorderActivity)context;
-                foodorder.displayprice(String.valueOf(money),list);
+                foodorder.displayprice(String.valueOf(money),accountlist);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     @Override
     public void onBindViewHolder(@NonNull FoodlisttakeoutApter.Myhot holder, int position) {
-        try {
             if(list.get(position) ==null){
                 return;
             }
@@ -78,6 +93,10 @@ public class FoodlisttakeoutApter extends RecyclerView.Adapter<FoodlisttakeoutAp
 
             if(list.get(position).getFavorRate()!=null ){
                 holder.favorRate.setText("好评率: "+String.valueOf(list.get(position).getFavorRate()));
+            }
+
+            if(list.get(position).getNums()!=null ){
+                holder.ed_num.setText(String.valueOf(list.get(position).getNums()));
             }
 
             holder.addnum.setOnClickListener(new View.OnClickListener() {
@@ -107,9 +126,6 @@ public class FoodlisttakeoutApter extends RecyclerView.Adapter<FoodlisttakeoutAp
                     }
                 }
             });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -118,8 +134,6 @@ public class FoodlisttakeoutApter extends RecyclerView.Adapter<FoodlisttakeoutAp
     }
 
     public class Myhot extends RecyclerView.ViewHolder{
-
-
         private final RelativeLayout re;
         private final ImageView imgUrl;
         private final TextView detail;

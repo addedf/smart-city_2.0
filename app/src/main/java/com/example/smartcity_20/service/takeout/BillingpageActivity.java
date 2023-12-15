@@ -51,7 +51,7 @@ public class BillingpageActivity extends AppCompatActivity {
     private TextView moneynum;
     private RecyclerView foodlist;
     private LinearLayout account;
-    private List<FoodBean.DataDTO> dataDTO;
+    private List<FoodBean.DataBean> dataDTO;
     private Tool tool;
     private final int REQUEST_CODE_DELIVERY  = 1 ;
     private AlertDialog alertDialog;
@@ -85,7 +85,7 @@ public class BillingpageActivity extends AppCompatActivity {
         String numlist = intent.getStringExtra(Common.numlist);
        // int  Foodorderid = Integer.parseInt(intent.getStringExtra(Common.Foodorderid));
         String str_shopname = intent.getStringExtra(Common.shopname);
-        dataDTO = gson.fromJson(numlist, new TypeToken<List<FoodBean.DataDTO>>() {}.getType());
+        dataDTO = gson.fromJson(numlist, new TypeToken<List<FoodBean.DataBean>>() {}.getType());
         shopname = findViewById(R.id.shopname);
         ImageView ic_back = findViewById(R.id.ic_back);
         deliveryaddress = findViewById(R.id.deliveryaddress);
@@ -158,7 +158,7 @@ public class BillingpageActivity extends AppCompatActivity {
                         takeoutorderBean.setSellerId(dataDTO.get(0).getSellerId());
 
                         ArrayList<TakeoutorderBean.OrderItemListBean> arrayList = new ArrayList();
-                        for (FoodBean.DataDTO dto : dataDTO) {
+                        for (FoodBean.DataBean dto : dataDTO) {
                             TakeoutorderBean.OrderItemListBean orderItemListBean = new TakeoutorderBean.OrderItemListBean();
                             //菜品
                             orderItemListBean.setProductId(dto.getId());
